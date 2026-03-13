@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #334155;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #f1f5f9;
+  --accent-foreground: #334155;
+  --border: #e2e8f0;
+  --ring: #6366f1;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --card: #1a1a2e;
+  --card-foreground: #ededed;
+  --primary: #818cf8;
+  --primary-foreground: #0a0a0a;
+  --secondary: #1e293b;
+  --secondary-foreground: #cbd5e1;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #1e293b;
+  --accent-foreground: #cbd5e1;
+  --border: #334155;
+  --ring: #818cf8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* Presentation mode styles */
+.presentation-mode {
+  font-size: 1.25rem;
+}
+
+.presentation-mode h1 {
+  font-size: 3rem;
+}
+
+.presentation-mode h2 {
+  font-size: 2.25rem;
+}
+
+.presentation-mode h3 {
+  font-size: 1.75rem;
+}
+
+.presentation-mode p,
+.presentation-mode li {
+  font-size: 1.5rem;
+  line-height: 2;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground);
+  border-radius: 4px;
+}
+
+/* Progress bar animation */
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: var(--progress);
+  }
+}
+
+.progress-fill {
+  animation: progressFill 0.8s ease-out forwards;
+}
