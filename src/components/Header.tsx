@@ -55,6 +55,14 @@ export default function Header({ onNavigate }: { onNavigate: (view: string, modu
                     </button>
 
                     <button
+                        onClick={() => onNavigate("scenario")}
+                        className="px-3 py-1.5 text-xs rounded-lg bg-[var(--secondary)] hover:bg-[var(--accent)] transition"
+                        title="Ethics Scenario"
+                    >
+                        🎭 Scenario
+                    </button>
+
+                    <button
                         onClick={() => onNavigate("badges")}
                         className="px-3 py-1.5 text-xs rounded-lg bg-[var(--secondary)] hover:bg-[var(--accent)] transition"
                         title="Badges"

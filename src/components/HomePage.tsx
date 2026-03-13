@@ -40,6 +40,12 @@ export default function HomePage({ onNavigate }: { onNavigate: (view: string, mo
                     >
                         🗺️ View Journey Map
                     </button>
+                    <button
+                        onClick={() => onNavigate("scenario")}
+                        className="px-6 py-3 border border-[var(--border)] rounded-xl font-medium hover:bg-[var(--secondary)] transition"
+                    >
+                        🎭 Ethics Scenario
+                    </button>
                 </div>
             </motion.section>
 
