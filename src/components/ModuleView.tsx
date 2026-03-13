@@ -16,7 +16,7 @@ export default function ModuleView({
     const mod = modules.find((m) => m.id === moduleId);
     const { presentationMode, completeModule, addBadge, progress } = useApp();
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [activeTab, setActiveTab] = useState<"slides" | "quiz" | "casestudy" | "ethics" | "dodont">("slides");
+    const [activeTab, setActiveTab] = useState<"slides" | "quiz" | "casestudy" | "ethics" | "dodont" | "aitools">("slides");
     const [revealedBullets, setRevealedBullets] = useState(0);
 
     if (!mod) return <div className="p-8 text-center">Module not found</div>;
@@ -89,7 +89,7 @@ export default function ModuleView({
 
             {/* Tab Navigation */}
             <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
-                {(["slides", "quiz", "casestudy", "ethics", "dodont"] as const).map((tab) => (
+                {(["slides", "quiz", "casestudy", "ethics", "dodont", "aitools"] as const).map((tab) => (
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab)}
@@ -103,6 +103,7 @@ export default function ModuleView({
                         {tab === "casestudy" && "📋 Case Study"}
                         {tab === "ethics" && "⚖️ Ethics Check"}
                         {tab === "dodont" && "✅ Do & Don't"}
+                        {tab === "aitools" && `🤖 AI Tools (${mod.aiTools.length})`}
                     </button>
                 ))}
             </div>
@@ -232,6 +233,52 @@ export default function ModuleView({
                                     ))}
                                 </ul>
                             </div>
+                        </div>
+                    </motion.div>
+                )}
+
+                {activeTab === "aitools" && (
+                    <motion.div key="aitools" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        <div className="space-y-4">
+                            <div className="p-4 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
+                                <h3 className="text-xl font-bold mb-1">🤖 Free AI Tools for This Module</h3>
+                                <p className="text-sm text-[var(--muted-foreground)]">
+                                    Explore these free tools to practice the skills taught in this module. Always use them ethically!
+                                </p>
+                            </div>
+                            {(() => {
+                                const categories = [...new Set(mod.aiTools.map((t) => t.category))];
+                                return categories.map((cat) => (
+                                    <div key={cat}>
+                                        <h4 className="text-sm font-semibold text-[var(--muted-foreground)] mb-2 uppercase tracking-wide">{cat}</h4>
+                                        <div className="grid sm:grid-cols-2 gap-3">
+                                            {mod.aiTools
+                                                .filter((t) => t.category === cat)
+                                                .map((tool, i) => (
+                                                    <motion.a
+                                                        key={i}
+                                                        href={tool.url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        initial={{ opacity: 0, y: 10 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        transition={{ delay: i * 0.05 }}
+                                                        className="group p-4 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:border-indigo-500/50 hover:shadow-md transition-all"
+                                                    >
+                                                        <div className="flex items-start justify-between mb-2">
+                                                            <h5 className="font-semibold text-sm group-hover:text-indigo-500 transition">{tool.name}</h5>
+                                                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-600 whitespace-nowrap">
+                                                                {tool.freeTag}
+                                                            </span>
+                                                        </div>
+                                                        <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">{tool.description}</p>
+                                                        <p className="text-[10px] text-indigo-500 mt-2 group-hover:underline">Visit →</p>
+                                                    </motion.a>
+                                                ))}
+                                        </div>
+                                    </div>
+                                ));
+                            })()}
                         </div>
                     </motion.div>
                 )}

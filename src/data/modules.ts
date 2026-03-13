@@ -10,6 +10,14 @@ export interface DoAndDont {
     dont: string[];
 }
 
+export interface AITool {
+    name: string;
+    url: string;
+    description: string;
+    category: string;
+    freeTag: string;
+}
+
 export interface Module {
     id: number;
     title: string;
@@ -23,6 +31,7 @@ export interface Module {
     doAndDont: DoAndDont;
     caseStudy: string;
     ethicsCheckpoint: string;
+    aiTools: AITool[];
 }
 
 export interface Slide {
@@ -123,7 +132,14 @@ export const modules: Module[] = [
             ]
         },
         caseStudy: "Ravi, a 2nd-year undergraduate, was curious about why his grandmother's blood pressure monitor sometimes gave inaccurate readings. Instead of just complaining, he started researching wearable health sensors. This curiosity led him to publish a paper on 'Improving Blood Pressure Monitoring Accuracy using Multi-Sensor Fusion' in an IEEE conference.",
-        ethicsCheckpoint: "Before starting your research journey, commit to the Research Integrity Pledge: I will conduct research honestly, give proper credit, use AI tools responsibly, and never fabricate or plagiarize data."
+        ethicsCheckpoint: "Before starting your research journey, commit to the Research Integrity Pledge: I will conduct research honestly, give proper credit, use AI tools responsibly, and never fabricate or plagiarize data.",
+        aiTools: [
+            { name: "ChatGPT (Free)", url: "https://chat.openai.com", description: "Brainstorm research interests, explore domains, and get explanations of unfamiliar fields", category: "Brainstorming", freeTag: "Free tier available" },
+            { name: "Google Gemini", url: "https://gemini.google.com", description: "Explore research areas, get domain overviews, and discover trending topics", category: "Brainstorming", freeTag: "Free" },
+            { name: "Perplexity AI", url: "https://www.perplexity.ai", description: "Ask questions about research fields with cited sources for verification", category: "Research Discovery", freeTag: "Free tier available" },
+            { name: "MindMeister", url: "https://www.mindmeister.com", description: "Create mind maps to visually organize your research interests and ideas", category: "Mind Mapping", freeTag: "Free tier (3 maps)" },
+            { name: "Coggle", url: "https://coggle.it", description: "Collaborative mind mapping tool to brainstorm research directions", category: "Mind Mapping", freeTag: "Free tier available" },
+        ]
     },
     {
         id: 2,
@@ -197,7 +213,15 @@ export const modules: Module[] = [
             dont: ["Choose a topic just because it sounds impressive", "Pick an overly broad or vague topic", "Ignore your genuine interests", "Let AI choose your research topic for you"]
         },
         caseStudy: "Priya noticed her farmer father struggling with crop diseases. Her curiosity about 'Why can't we detect plant diseases early?' led her to the domain of Agricultural AI. She developed a mobile app using CNN-based image classification for early detection of tomato leaf diseases, which won a national hackathon.",
-        ethicsCheckpoint: "When using AI to explore research topics, always verify the suggestions against real-world problems. AI can suggest topics, but the genuine interest and validation must come from you."
+        ethicsCheckpoint: "When using AI to explore research topics, always verify the suggestions against real-world problems. AI can suggest topics, but the genuine interest and validation must come from you.",
+        aiTools: [
+            { name: "Semantic Scholar", url: "https://www.semanticscholar.org", description: "AI-powered academic search engine to discover trending research topics and papers", category: "Topic Discovery", freeTag: "Free" },
+            { name: "Connected Papers", url: "https://www.connectedpapers.com", description: "Visual tool to explore related papers and find research clusters in your interest area", category: "Topic Discovery", freeTag: "Free (5 graphs/month)" },
+            { name: "Research Rabbit", url: "https://www.researchrabbit.ai", description: "Discover papers and research topics through AI-powered recommendations", category: "Topic Discovery", freeTag: "Free" },
+            { name: "Litmaps", url: "https://www.litmaps.com", description: "Visualize research landscapes and discover new topics through citation mapping", category: "Visualization", freeTag: "Free tier available" },
+            { name: "Elicit", url: "https://elicit.com", description: "AI research assistant that helps find relevant papers and extract key findings for topic exploration", category: "Research Assistant", freeTag: "Free tier available" },
+            { name: "Google Trends", url: "https://trends.google.com", description: "Explore trending search topics to identify areas of growing public and research interest", category: "Trend Analysis", freeTag: "Free" },
+        ]
     },
     {
         id: 3,
@@ -281,7 +305,15 @@ export const modules: Module[] = [
             dont: ["Generate fake references using AI", "Copy AI text directly into your paper", "Submit AI-generated work as original", "Use AI to fabricate or manipulate data"]
         },
         caseStudy: "A PhD student used ChatGPT to generate references for their thesis. The examiner discovered that 40% of the cited papers didn't exist. The student's degree was revoked, and they were banned from the university. This could have been avoided by simply verifying each reference.",
-        ethicsCheckpoint: "Before using any AI tool in your research, ask yourself: 'Am I using this to enhance my understanding, or to replace my thinking?' If it's the latter, stop."
+        ethicsCheckpoint: "Before using any AI tool in your research, ask yourself: 'Am I using this to enhance my understanding, or to replace my thinking?' If it's the latter, stop.",
+        aiTools: [
+            { name: "Grammarly", url: "https://www.grammarly.com", description: "AI-powered grammar and clarity checker — ethical for polishing your own writing", category: "Writing Aid", freeTag: "Free tier available" },
+            { name: "QuillBot", url: "https://quillbot.com", description: "Paraphrasing tool to help rephrase your own ideas more clearly (use ethically!)", category: "Writing Aid", freeTag: "Free tier available" },
+            { name: "Turnitin (via institution)", url: "https://www.turnitin.com", description: "Plagiarism detection tool to check your work before submission", category: "Integrity Check", freeTag: "Free via most universities" },
+            { name: "Duplichecker", url: "https://www.duplichecker.com", description: "Free plagiarism checker to verify originality of your writing", category: "Integrity Check", freeTag: "Free" },
+            { name: "ChatGPT (Free)", url: "https://chat.openai.com", description: "Use to understand complex concepts — never to generate text for submission", category: "Learning Aid", freeTag: "Free tier available" },
+            { name: "AI Ethics Guidelines (UNESCO)", url: "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics", description: "Reference guide for ethical AI use in research and education", category: "Ethics Reference", freeTag: "Free" },
+        ]
     },
     {
         id: 4,
@@ -356,7 +388,16 @@ export const modules: Module[] = [
             dont: ["Rely only on Google for academic search", "Ignore citation networks", "Use only the first page of results", "Skip reading abstracts before downloading"]
         },
         caseStudy: "Amit was researching 'sentiment analysis' but found thousands of irrelevant papers. By using Boolean search ('sentiment analysis' AND 'social media' AND 'deep learning' NOT 'product reviews') on Scopus, he narrowed results to 47 highly relevant papers and completed his literature review in 2 weeks instead of 2 months.",
-        ethicsCheckpoint: "When using AI to search for papers, always verify that the papers actually exist. AI tools sometimes hallucinate paper titles and authors."
+        ethicsCheckpoint: "When using AI to search for papers, always verify that the papers actually exist. AI tools sometimes hallucinate paper titles and authors.",
+        aiTools: [
+            { name: "Google Scholar", url: "https://scholar.google.com", description: "The most widely used free academic search engine with citation tracking", category: "Paper Search", freeTag: "Free" },
+            { name: "Semantic Scholar", url: "https://www.semanticscholar.org", description: "AI-powered search with TLDR summaries, citation context, and influence scores", category: "Paper Search", freeTag: "Free" },
+            { name: "PubMed", url: "https://pubmed.ncbi.nlm.nih.gov", description: "Free database for biomedical and life sciences literature", category: "Paper Search", freeTag: "Free" },
+            { name: "arXiv", url: "https://arxiv.org", description: "Open-access preprint repository for STEM fields — latest research before journal publication", category: "Paper Search", freeTag: "Free" },
+            { name: "CORE", url: "https://core.ac.uk", description: "Aggregator of open-access research papers from repositories worldwide", category: "Open Access", freeTag: "Free" },
+            { name: "Connected Papers", url: "https://www.connectedpapers.com", description: "Build visual citation graphs to discover related papers and trace research lineage", category: "Citation Network", freeTag: "Free (5 graphs/month)" },
+            { name: "Inciteful", url: "https://inciteful.xyz", description: "Build citation networks from a seed paper to find the most important related work", category: "Citation Network", freeTag: "Free" },
+        ]
     },
     {
         id: 5,
@@ -419,7 +460,15 @@ export const modules: Module[] = [
             dont: ["Select papers randomly", "Only choose papers that support your hypothesis", "Ignore older foundational papers", "Select papers only from one source"]
         },
         caseStudy: "Sneha was overwhelmed by 200+ papers on 'object detection.' Using the Golden Strategy, she selected 1 YOLO survey paper, 1 recent review from a Q1 journal, and 3 experimental papers (YOLO v5, EfficientDet, DETR). This gave her a complete picture in just 5 papers.",
-        ethicsCheckpoint: "When shortlisting papers, ensure you're not cherry-picking only papers that support your hypothesis. Good research considers all perspectives, including contradictory findings."
+        ethicsCheckpoint: "When shortlisting papers, ensure you're not cherry-picking only papers that support your hypothesis. Good research considers all perspectives, including contradictory findings.",
+        aiTools: [
+            { name: "Elicit", url: "https://elicit.com", description: "AI assistant that extracts key findings, methods, and results from papers for quick comparison", category: "Paper Analysis", freeTag: "Free tier available" },
+            { name: "Research Rabbit", url: "https://www.researchrabbit.ai", description: "Get AI-recommended papers based on your collection — great for finding the right 5 papers", category: "Recommendation", freeTag: "Free" },
+            { name: "Scite.ai", url: "https://scite.ai", description: "See how papers have been cited — supporting, contrasting, or mentioning — to assess quality", category: "Citation Analysis", freeTag: "Free tier available" },
+            { name: "Litmaps", url: "https://www.litmaps.com", description: "Create visual literature maps to identify survey papers, reviews, and key experimental work", category: "Visualization", freeTag: "Free tier available" },
+            { name: "Zotero", url: "https://www.zotero.org", description: "Free reference manager to organize, tag, and categorize your shortlisted papers", category: "Reference Manager", freeTag: "Free" },
+            { name: "Mendeley", url: "https://www.mendeley.com", description: "Reference manager with PDF annotation and paper organization features", category: "Reference Manager", freeTag: "Free" },
+        ]
     },
     {
         id: 6,
@@ -484,7 +533,15 @@ export const modules: Module[] = [
             dont: ["Try to understand everything in one read", "Skip the methodology section", "Ignore figures and tables", "Read without taking notes"]
         },
         caseStudy: "Karthik spent 3 weeks reading 20 papers word-by-word and still felt confused. His mentor taught him the 3-pass strategy. In the next 2 weeks, he effectively reviewed 40 papers, identified key themes, and found his research gap.",
-        ethicsCheckpoint: "When using AI to summarize papers, always read the original paper yourself. AI summaries can miss nuances, misinterpret findings, or hallucinate details."
+        ethicsCheckpoint: "When using AI to summarize papers, always read the original paper yourself. AI summaries can miss nuances, misinterpret findings, or hallucinate details.",
+        aiTools: [
+            { name: "SciSpace (Typeset)", url: "https://typeset.io", description: "AI copilot that explains complex papers, highlights key sections, and answers questions about any PDF", category: "Paper Reading", freeTag: "Free tier available" },
+            { name: "Explainpaper", url: "https://www.explainpaper.com", description: "Upload a paper and highlight confusing text — AI explains it in simple language", category: "Paper Reading", freeTag: "Free" },
+            { name: "ChatPDF", url: "https://www.chatpdf.com", description: "Upload a research PDF and ask questions about its content interactively", category: "Paper Reading", freeTag: "Free (2 PDFs/day)" },
+            { name: "Scholarcy", url: "https://www.scholarcy.com", description: "Generates summary flashcards from research papers highlighting key findings and methods", category: "Summarization", freeTag: "Free tier available" },
+            { name: "Hypothesis", url: "https://web.hypothes.is", description: "Open-source web annotation tool to highlight and annotate papers collaboratively", category: "Annotation", freeTag: "Free" },
+            { name: "Notion", url: "https://www.notion.so", description: "Organize your paper reading notes with templates for the 3-pass reading strategy", category: "Note Taking", freeTag: "Free for students" },
+        ]
     },
     {
         id: 7,
@@ -547,7 +604,15 @@ export const modules: Module[] = [
             dont: ["Claim a gap without evidence", "Ignore recent publications", "Assume your idea is completely new without checking", "Rely on AI to identify gaps for you"]
         },
         caseStudy: "Meera compared 15 papers on diabetic retinopathy detection. She noticed all used single-modality imaging (fundus photos). She proposed a multi-modal approach combining fundus + OCT images, which improved detection accuracy by 8% and got published in a Q1 journal.",
-        ethicsCheckpoint: "When identifying research gaps, be honest about what truly hasn't been done versus what you haven't found yet. Thorough literature search is essential before claiming novelty."
+        ethicsCheckpoint: "When identifying research gaps, be honest about what truly hasn't been done versus what you haven't found yet. Thorough literature search is essential before claiming novelty.",
+        aiTools: [
+            { name: "Elicit", url: "https://elicit.com", description: "Extract methods, datasets, and results from multiple papers to build comparison matrices", category: "Gap Analysis", freeTag: "Free tier available" },
+            { name: "Consensus", url: "https://consensus.app", description: "AI search engine that finds and synthesizes scientific consensus — spot where consensus is missing", category: "Gap Analysis", freeTag: "Free tier available" },
+            { name: "Connected Papers", url: "https://www.connectedpapers.com", description: "Visualize paper clusters to identify under-explored areas between research groups", category: "Visualization", freeTag: "Free (5 graphs/month)" },
+            { name: "Scite.ai", url: "https://scite.ai", description: "Find contradicting citations and disputed findings — these often indicate research gaps", category: "Citation Analysis", freeTag: "Free tier available" },
+            { name: "Google Sheets", url: "https://sheets.google.com", description: "Create your research gap comparison matrix (Paper vs Method vs Dataset vs Accuracy vs Limitation)", category: "Organization", freeTag: "Free" },
+            { name: "ChatGPT (Free)", url: "https://chat.openai.com", description: "Discuss potential gaps after reading papers — use as a thinking partner, not a gap finder", category: "Brainstorming", freeTag: "Free tier available" },
+        ]
     },
     {
         id: 8,
@@ -604,7 +669,14 @@ export const modules: Module[] = [
             dont: ["Be vague or overly broad", "Make unsupported claims", "Ignore existing solutions", "Promise unrealistic outcomes"]
         },
         caseStudy: "Arjun initially wrote: 'AI in healthcare needs improvement.' His mentor helped him refine it to: 'Current AI-based skin cancer detection systems achieve only 85% accuracy on dark skin tones due to training data bias, limiting their clinical applicability in diverse populations.' This specific statement led to a focused and impactful study.",
-        ethicsCheckpoint: "Ensure your problem statement doesn't exaggerate the limitations of existing work. Be fair and accurate when describing what others have done."
+        ethicsCheckpoint: "Ensure your problem statement doesn't exaggerate the limitations of existing work. Be fair and accurate when describing what others have done.",
+        aiTools: [
+            { name: "ChatGPT (Free)", url: "https://chat.openai.com", description: "Refine and sharpen your problem statement draft — use it to critique, not to generate", category: "Writing Aid", freeTag: "Free tier available" },
+            { name: "Google Gemini", url: "https://gemini.google.com", description: "Get feedback on problem statement clarity, specificity, and structure", category: "Writing Aid", freeTag: "Free" },
+            { name: "Grammarly", url: "https://www.grammarly.com", description: "Ensure your problem statement is grammatically clear and professionally written", category: "Writing Aid", freeTag: "Free tier available" },
+            { name: "Hemingway Editor", url: "https://hemingwayapp.com", description: "Check readability and simplify complex sentences in your problem statement", category: "Readability", freeTag: "Free (web version)" },
+            { name: "Semantic Scholar", url: "https://www.semanticscholar.org", description: "Verify that the limitations you cite in your problem statement are backed by real papers", category: "Verification", freeTag: "Free" },
+        ]
     },
     {
         id: 9,
@@ -662,7 +734,15 @@ export const modules: Module[] = [
             dont: ["Send generic mass emails", "Ask experts to do your work", "Ignore junior researchers who might help", "Stalk researchers on social media"]
         },
         caseStudy: "Divya found Prof. Kumar's work on NLP through Google Scholar. She read 5 of his papers, then sent a thoughtful email discussing a specific finding. Prof. Kumar was impressed and offered her a remote research internship, which led to a co-authored publication.",
-        ethicsCheckpoint: "When reaching out to experts, be honest about your level of experience. Don't misrepresent yourself or your research stage."
+        ethicsCheckpoint: "When reaching out to experts, be honest about your level of experience. Don't misrepresent yourself or your research stage.",
+        aiTools: [
+            { name: "Google Scholar Profiles", url: "https://scholar.google.com", description: "Find top researchers by citation count, h-index, and publication list in your domain", category: "Expert Discovery", freeTag: "Free" },
+            { name: "ResearchGate", url: "https://www.researchgate.net", description: "Academic social network to find experts, follow their work, and ask questions", category: "Networking", freeTag: "Free" },
+            { name: "ORCID", url: "https://orcid.org", description: "Find verified researcher profiles with complete publication records", category: "Expert Discovery", freeTag: "Free" },
+            { name: "Semantic Scholar Author Pages", url: "https://www.semanticscholar.org", description: "Explore author profiles with AI-generated research summaries and influence metrics", category: "Expert Discovery", freeTag: "Free" },
+            { name: "LinkedIn", url: "https://www.linkedin.com", description: "Professional networking to connect with researchers and find collaboration opportunities", category: "Networking", freeTag: "Free tier available" },
+            { name: "Twitter/X", url: "https://twitter.com", description: "Many researchers share findings and engage in discussions — follow #AcademicTwitter", category: "Networking", freeTag: "Free" },
+        ]
     },
     {
         id: 10,
@@ -728,7 +808,16 @@ export const modules: Module[] = [
             dont: ["Write the abstract first", "Use overly complex language", "Skip the discussion section", "Submit without proofreading"]
         },
         caseStudy: "Rahul tried writing his paper from abstract to conclusion sequentially and got stuck at the introduction for 3 weeks. His mentor suggested starting with methodology and results. He completed his first draft in 10 days using this approach.",
-        ethicsCheckpoint: "When using AI for writing assistance, use it only for grammar and clarity improvements. The ideas, analysis, and conclusions must be entirely your own."
+        ethicsCheckpoint: "When using AI for writing assistance, use it only for grammar and clarity improvements. The ideas, analysis, and conclusions must be entirely your own.",
+        aiTools: [
+            { name: "Overleaf", url: "https://www.overleaf.com", description: "Free online LaTeX editor with journal templates — the standard for academic paper writing", category: "Writing Platform", freeTag: "Free" },
+            { name: "Grammarly", url: "https://www.grammarly.com", description: "AI grammar and style checker to polish your manuscript professionally", category: "Writing Aid", freeTag: "Free tier available" },
+            { name: "Writefull", url: "https://www.writefull.com", description: "AI writing assistant specifically designed for academic and scientific writing", category: "Academic Writing", freeTag: "Free tier available" },
+            { name: "Zotero", url: "https://www.zotero.org", description: "Generate citations and bibliographies automatically in any journal format", category: "Reference Manager", freeTag: "Free" },
+            { name: "Tables Generator", url: "https://www.tablesgenerator.com", description: "Create LaTeX, HTML, and Markdown tables for your research paper easily", category: "Formatting", freeTag: "Free" },
+            { name: "draw.io (diagrams.net)", url: "https://app.diagrams.net", description: "Create research methodology diagrams, flowcharts, and architecture figures", category: "Diagrams", freeTag: "Free" },
+            { name: "BioRender", url: "https://www.biorender.com", description: "Create professional scientific figures and illustrations for your paper", category: "Figures", freeTag: "Free for students" },
+        ]
     },
     {
         id: 11,
@@ -794,7 +883,15 @@ export const modules: Module[] = [
             dont: ["Submit to predatory journals", "Choose venues only by acceptance rate", "Submit the same paper to multiple journals simultaneously", "Ignore the venue's scope and audience"]
         },
         caseStudy: "Lakshmi submitted her excellent ML paper to a predatory journal that promised '7-day review.' She paid ₹50,000 but the publication had no indexing. Her work was essentially wasted. She later resubmitted to a legitimate Scopus journal and got published after proper peer review.",
-        ethicsCheckpoint: "Never submit the same paper to multiple journals simultaneously. This is a serious ethical violation called 'simultaneous submission' and can result in blacklisting."
+        ethicsCheckpoint: "Never submit the same paper to multiple journals simultaneously. This is a serious ethical violation called 'simultaneous submission' and can result in blacklisting.",
+        aiTools: [
+            { name: "Journal Finder (Elsevier)", url: "https://journalfinder.elsevier.com", description: "Enter your abstract and get matched with suitable Elsevier journals", category: "Journal Selection", freeTag: "Free" },
+            { name: "Journal Suggester (Springer)", url: "https://journalsuggester.springer.com", description: "AI-powered journal recommendation based on your manuscript title and abstract", category: "Journal Selection", freeTag: "Free" },
+            { name: "JANE (Journal/Author Name Estimator)", url: "https://jane.biosemantics.org", description: "Find the best matching journals for your paper based on content analysis", category: "Journal Selection", freeTag: "Free" },
+            { name: "Scimago Journal Rank (SJR)", url: "https://www.scimagojr.com", description: "Check journal rankings, impact metrics, and quartile ratings (Q1-Q4)", category: "Journal Quality", freeTag: "Free" },
+            { name: "Beall's List", url: "https://beallslist.net", description: "Check if a journal is potentially predatory — essential before submitting", category: "Predatory Check", freeTag: "Free" },
+            { name: "DOAJ", url: "https://doaj.org", description: "Directory of Open Access Journals — verify legitimate open-access journals", category: "Journal Quality", freeTag: "Free" },
+        ]
     },
     {
         id: 12,
@@ -854,7 +951,14 @@ export const modules: Module[] = [
             dont: ["Submit without checking scope", "Ignore formatting guidelines", "Submit with grammatical errors", "Skip the cover letter"]
         },
         caseStudy: "Vikram's paper was desk-rejected 3 times from different journals. Each time, the reason was 'out of scope.' He finally read the journal's aims carefully, found a perfect match, and got accepted after peer review. Lesson: 10 minutes reading the scope saves months of waiting.",
-        ethicsCheckpoint: "Never manipulate your paper's content to fit a journal's scope artificially. If your paper doesn't genuinely fit, find a more appropriate venue."
+        ethicsCheckpoint: "Never manipulate your paper's content to fit a journal's scope artificially. If your paper doesn't genuinely fit, find a more appropriate venue.",
+        aiTools: [
+            { name: "Grammarly", url: "https://www.grammarly.com", description: "Fix grammar and language issues that commonly cause desk rejection", category: "Language Check", freeTag: "Free tier available" },
+            { name: "Writefull", url: "https://www.writefull.com", description: "Academic language checker trained on published papers — catches field-specific issues", category: "Academic Writing", freeTag: "Free tier available" },
+            { name: "Turnitin (via institution)", url: "https://www.turnitin.com", description: "Check plagiarism score before submission — most journals use this", category: "Plagiarism Check", freeTag: "Free via university" },
+            { name: "Paperpal", url: "https://paperpal.com", description: "AI writing assistant for academic manuscripts — checks language, structure, and consistency", category: "Manuscript Check", freeTag: "Free tier available" },
+            { name: "Scimago Journal Rank", url: "https://www.scimagojr.com", description: "Verify journal scope and aims match your paper before submitting", category: "Scope Check", freeTag: "Free" },
+        ]
     },
     {
         id: 13,
@@ -919,7 +1023,14 @@ export const modules: Module[] = [
             dont: ["Ignore any comments", "Respond emotionally or defensively", "Make changes without explaining them", "Rush the revision process"]
         },
         caseStudy: "Ananya received harsh reviews with 47 comments on her first paper. Instead of giving up, she spent 6 weeks addressing each comment systematically. Her response letter was 15 pages long. The paper was accepted in the next round, and one reviewer praised her 'thorough and professional response.'",
-        ethicsCheckpoint: "Never fabricate results or data to satisfy reviewer demands. If a reviewer asks for experiments you can't do, explain honestly and suggest alternatives."
+        ethicsCheckpoint: "Never fabricate results or data to satisfy reviewer demands. If a reviewer asks for experiments you can't do, explain honestly and suggest alternatives.",
+        aiTools: [
+            { name: "ChatGPT (Free)", url: "https://chat.openai.com", description: "Draft point-by-point response letters — use as a template, then personalize with specifics", category: "Response Drafting", freeTag: "Free tier available" },
+            { name: "Grammarly", url: "https://www.grammarly.com", description: "Ensure your response letter is professional, polite, and grammatically perfect", category: "Writing Aid", freeTag: "Free tier available" },
+            { name: "Writefull", url: "https://www.writefull.com", description: "Academic writing assistant to help phrase responses in scholarly tone", category: "Academic Writing", freeTag: "Free tier available" },
+            { name: "Overleaf", url: "https://www.overleaf.com", description: "Track changes and create diff documents to highlight revisions for reviewers", category: "Revision Tracking", freeTag: "Free" },
+            { name: "LaTeX Diff (latexdiff)", url: "https://www.overleaf.com/learn/latex/Articles/How_to_use_latexdiff_on_Overleaf", description: "Generate visual diff between original and revised manuscript versions", category: "Revision Tracking", freeTag: "Free" },
+        ]
     },
     {
         id: 14,
@@ -979,7 +1090,16 @@ export const modules: Module[] = [
             dont: ["Self-cite excessively", "Buy citations or use citation rings", "Ignore social media for research", "Publish only for quantity over quality"]
         },
         caseStudy: "Prof. Sharma had 50 publications but low citations. She started sharing her work on ResearchGate, creating video abstracts, and presenting at international conferences. In 2 years, her citations tripled and she received 3 international collaboration offers.",
-        ethicsCheckpoint: "Never engage in citation manipulation — self-citing excessively, citation rings, or buying citations. These are serious ethical violations that can lead to retraction and career damage."
+        ethicsCheckpoint: "Never engage in citation manipulation — self-citing excessively, citation rings, or buying citations. These are serious ethical violations that can lead to retraction and career damage.",
+        aiTools: [
+            { name: "ResearchGate", url: "https://www.researchgate.net", description: "Share papers, track reads and citations, and connect with researchers globally", category: "Visibility", freeTag: "Free" },
+            { name: "Google Scholar Profile", url: "https://scholar.google.com", description: "Create your researcher profile to track citations, h-index, and make work discoverable", category: "Visibility", freeTag: "Free" },
+            { name: "ORCID", url: "https://orcid.org", description: "Get a unique researcher ID that links all your publications across platforms", category: "Identity", freeTag: "Free" },
+            { name: "Canva", url: "https://www.canva.com", description: "Create visual abstracts, research posters, and social media graphics for your papers", category: "Visual Content", freeTag: "Free tier available" },
+            { name: "Loom", url: "https://www.loom.com", description: "Record video abstracts of your papers to increase engagement and accessibility", category: "Video", freeTag: "Free tier available" },
+            { name: "GitHub", url: "https://github.com", description: "Share your research code and datasets openly to increase reproducibility and citations", category: "Open Source", freeTag: "Free" },
+            { name: "Zenodo", url: "https://zenodo.org", description: "Archive datasets and code with DOI — makes your research citable and discoverable", category: "Data Sharing", freeTag: "Free" },
+        ]
     },
     {
         id: 15,
@@ -1041,7 +1161,15 @@ export const modules: Module[] = [
             dont: ["Submit generic proposals to all agencies", "Underestimate or overestimate budget", "Ignore the evaluation criteria", "Promise unrealistic outcomes"]
         },
         caseStudy: "Dr. Patel's first 3 proposals were rejected because they lacked preliminary data. For his 4th attempt, he included pilot study results showing 15% improvement. The proposal was funded for ₹35 Lakhs by DST-SERB.",
-        ethicsCheckpoint: "Never inflate your qualifications, fabricate preliminary results, or plagiarize from other proposals. Funding fraud is a career-ending offense."
+        ethicsCheckpoint: "Never inflate your qualifications, fabricate preliminary results, or plagiarize from other proposals. Funding fraud is a career-ending offense.",
+        aiTools: [
+            { name: "ChatGPT (Free)", url: "https://chat.openai.com", description: "Brainstorm proposal structure, refine objectives, and get feedback on clarity", category: "Proposal Drafting", freeTag: "Free tier available" },
+            { name: "Overleaf", url: "https://www.overleaf.com", description: "LaTeX templates for research proposals from major funding agencies", category: "Templates", freeTag: "Free" },
+            { name: "Gantt.io", url: "https://www.gantt.io", description: "Create professional Gantt charts for your project timeline and milestones", category: "Project Planning", freeTag: "Free tier available" },
+            { name: "Google Sheets", url: "https://sheets.google.com", description: "Create detailed budget breakdowns with justification for your proposal", category: "Budget Planning", freeTag: "Free" },
+            { name: "Notion", url: "https://www.notion.so", description: "Organize proposal sections, track deadlines, and collaborate with team members", category: "Project Management", freeTag: "Free for students" },
+            { name: "Grammarly", url: "https://www.grammarly.com", description: "Polish proposal language to meet professional standards expected by funding agencies", category: "Writing Aid", freeTag: "Free tier available" },
+        ]
     },
     {
         id: 16,
@@ -1109,7 +1237,15 @@ export const modules: Module[] = [
             dont: ["Claim higher TRL than justified", "Skip TRL levels", "Ignore validation requirements", "Confuse lab results with market readiness"]
         },
         caseStudy: "A team developed an AI-based crop disease detection app (TRL 4 in lab). They applied for DST funding to reach TRL 6 (field testing). After successful field trials with 500 farmers, they filed a patent (TRL 7) and are now incubated at IIT Madras to reach TRL 9.",
-        ethicsCheckpoint: "Be honest about your technology's readiness level. Overstating TRL to secure funding or investment is a form of research fraud."
+        ethicsCheckpoint: "Be honest about your technology's readiness level. Overstating TRL to secure funding or investment is a form of research fraud.",
+        aiTools: [
+            { name: "Google Colab", url: "https://colab.research.google.com", description: "Free cloud-based Python notebooks with GPU — prototype and validate your research code", category: "Prototyping", freeTag: "Free" },
+            { name: "Kaggle", url: "https://www.kaggle.com", description: "Free datasets, notebooks, and GPU compute to build and test your research models", category: "Prototyping", freeTag: "Free" },
+            { name: "Hugging Face", url: "https://huggingface.co", description: "Access pre-trained AI models and deploy demos to validate your research approach", category: "Model Hub", freeTag: "Free tier available" },
+            { name: "Streamlit", url: "https://streamlit.io", description: "Build and deploy interactive demos of your research prototype quickly", category: "Demo Building", freeTag: "Free" },
+            { name: "GitHub", url: "https://github.com", description: "Version control your research code and make it reproducible for TRL validation", category: "Code Management", freeTag: "Free" },
+            { name: "draw.io", url: "https://app.diagrams.net", description: "Create TRL progression diagrams and system architecture visuals", category: "Diagrams", freeTag: "Free" },
+        ]
     },
     {
         id: 17,
@@ -1175,6 +1311,15 @@ export const modules: Module[] = [
             dont: ["Skip market validation", "Ignore intellectual property protection", "Try to build everything alone", "Seek funding before having a prototype"]
         },
         caseStudy: "Three IIT students developed an AI-based language translation tool during their research project. They validated the need with 100 potential users, filed a patent, joined their university incubator, received ₹20 Lakhs from DST-NIDHI, and now serve 10,000+ users across rural India.",
-        ethicsCheckpoint: "When commercializing research, ensure proper attribution to your university, co-researchers, and funding agencies. Respect IP agreements and licensing terms."
+        ethicsCheckpoint: "When commercializing research, ensure proper attribution to your university, co-researchers, and funding agencies. Respect IP agreements and licensing terms.",
+        aiTools: [
+            { name: "Lean Canvas (Leanstack)", url: "https://leanstack.com", description: "Create a one-page business model canvas for your research-based startup idea", category: "Business Planning", freeTag: "Free tier available" },
+            { name: "Canva", url: "https://www.canva.com", description: "Design pitch decks, investor presentations, and startup branding materials", category: "Pitch Deck", freeTag: "Free tier available" },
+            { name: "Google Forms", url: "https://forms.google.com", description: "Create surveys to validate market need and collect user feedback for your MVP", category: "Market Validation", freeTag: "Free" },
+            { name: "Figma", url: "https://www.figma.com", description: "Design UI/UX prototypes for your product before building — validate with users", category: "Prototyping", freeTag: "Free tier available" },
+            { name: "Indian Patent Search (IPIndia)", url: "https://ipindia.gov.in", description: "Search existing patents in India before filing your own to ensure novelty", category: "IP Research", freeTag: "Free" },
+            { name: "Startup India Portal", url: "https://www.startupindia.gov.in", description: "Register your startup, access government schemes, tax benefits, and funding opportunities", category: "Startup Support", freeTag: "Free" },
+            { name: "GitHub", url: "https://github.com", description: "Open-source your research code to build community and attract collaborators", category: "Open Source", freeTag: "Free" },
+        ]
     }
 ];
