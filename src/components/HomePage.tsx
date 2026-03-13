@@ -46,6 +46,14 @@ export default function HomePage({ onNavigate }: { onNavigate: (view: string, mo
                     >
                         🎭 Ethics Scenario
                     </button>
+                    <a
+                        href="https://scholar-sparkle-web.lovable.app/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-medium hover:shadow-lg hover:shadow-amber-500/25 transition-all"
+                    >
+                        👨‍🏫 Resource Person
+                    </a>
                 </div>
             </motion.section>
 

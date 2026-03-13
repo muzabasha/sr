@@ -16,6 +16,9 @@ export interface AITool {
     description: string;
     category: string;
     freeTag: string;
+    howToUse?: string[];
+    interpretOutput?: string[];
+    researchTip?: string;
 }
 
 export interface Module {

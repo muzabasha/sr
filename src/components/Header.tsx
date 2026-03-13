@@ -62,6 +62,16 @@ export default function Header({ onNavigate }: { onNavigate: (view: string, modu
                         🎭 Scenario
                     </button>
 
+                    <a
+                        href="https://scholar-sparkle-web.lovable.app/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-1.5 text-xs rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:shadow-md transition"
+                        title="Resource Person"
+                    >
+                        👨‍🏫 Resource Person
+                    </a>
+
                     <button
                         onClick={() => onNavigate("badges")}
                         className="px-3 py-1.5 text-xs rounded-lg bg-[var(--secondary)] hover:bg-[var(--accent)] transition"

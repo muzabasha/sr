@@ -3,6 +3,7 @@ import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { modules, type Slide } from "@/data/modules";
 import { useApp } from "@/context/AppContext";
+import { getToolInstructions } from "@/data/toolInstructions";
 import QuizEngine from "./QuizEngine";
 import InteractiveActivity from "./InteractiveActivity";
 
@@ -239,46 +240,72 @@ export default function ModuleView({
 
                 {activeTab === "aitools" && (
                     <motion.div key="aitools" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                        <div className="space-y-4">
+                        <div className="space-y-6">
                             <div className="p-4 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
                                 <h3 className="text-xl font-bold mb-1">🤖 Free AI Tools for This Module</h3>
                                 <p className="text-sm text-[var(--muted-foreground)]">
-                                    Explore these free tools to practice the skills taught in this module. Always use them ethically!
+                                    Explore these tools with step-by-step instructions. Learn how to use each tool and interpret its output for your research.
                                 </p>
                             </div>
-                            {(() => {
-                                const categories = [...new Set(mod.aiTools.map((t) => t.category))];
-                                return categories.map((cat) => (
-                                    <div key={cat}>
-                                        <h4 className="text-sm font-semibold text-[var(--muted-foreground)] mb-2 uppercase tracking-wide">{cat}</h4>
-                                        <div className="grid sm:grid-cols-2 gap-3">
-                                            {mod.aiTools
-                                                .filter((t) => t.category === cat)
-                                                .map((tool, i) => (
-                                                    <motion.a
-                                                        key={i}
-                                                        href={tool.url}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        initial={{ opacity: 0, y: 10 }}
-                                                        animate={{ opacity: 1, y: 0 }}
-                                                        transition={{ delay: i * 0.05 }}
-                                                        className="group p-4 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:border-indigo-500/50 hover:shadow-md transition-all"
-                                                    >
-                                                        <div className="flex items-start justify-between mb-2">
-                                                            <h5 className="font-semibold text-sm group-hover:text-indigo-500 transition">{tool.name}</h5>
-                                                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-600 whitespace-nowrap">
-                                                                {tool.freeTag}
-                                                            </span>
-                                                        </div>
-                                                        <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">{tool.description}</p>
-                                                        <p className="text-[10px] text-indigo-500 mt-2 group-hover:underline">Visit →</p>
-                                                    </motion.a>
-                                                ))}
+                            {mod.aiTools.map((tool, i) => {
+                                const instr = getToolInstructions(tool.name);
+                                return (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: i * 0.05 }}
+                                        className="rounded-xl border border-[var(--border)] bg-[var(--card)] overflow-hidden"
+                                    >
+                                        <div className="p-4 flex items-start justify-between gap-3 border-b border-[var(--border)]">
+                                            <div>
+                                                <div className="flex items-center gap-2 flex-wrap">
+                                                    <h5 className="font-semibold">{tool.name}</h5>
+                                                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-600">{tool.freeTag}</span>
+                                                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-500">{tool.category}</span>
+                                                </div>
+                                                <p className="text-sm text-[var(--muted-foreground)] mt-1">{tool.description}</p>
+                                            </div>
+                                            <a href={tool.url} target="_blank" rel="noopener noreferrer"
+                                                className="shrink-0 px-3 py-1.5 text-xs rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition">
+                                                Open Tool ↗
+                                            </a>
                                         </div>
-                                    </div>
-                                ));
-                            })()}
+                                        {instr && (
+                                            <div className="p-4 grid md:grid-cols-2 gap-4">
+                                                <div>
+                                                    <h6 className="text-xs font-semibold uppercase tracking-wide text-indigo-500 mb-2">📋 How to Use</h6>
+                                                    <ol className="space-y-1.5">
+                                                        {instr.howToUse.map((step, si) => (
+                                                            <li key={si} className="text-xs text-[var(--muted-foreground)] flex items-start gap-2">
+                                                                <span className="text-indigo-400 font-bold shrink-0">{si + 1}.</span>
+                                                                <span>{step}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ol>
+                                                </div>
+                                                <div>
+                                                    <h6 className="text-xs font-semibold uppercase tracking-wide text-amber-500 mb-2">🔍 Interpreting Output</h6>
+                                                    <ul className="space-y-1.5">
+                                                        {instr.interpretOutput.map((tip, ti) => (
+                                                            <li key={ti} className="text-xs text-[var(--muted-foreground)] flex items-start gap-2">
+                                                                <span className="text-amber-400 shrink-0">▸</span>
+                                                                <span>{tip}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                                <div className="md:col-span-2 p-3 rounded-lg bg-gradient-to-r from-green-500/5 to-emerald-500/5 border border-green-500/10">
+                                                    <p className="text-xs">
+                                                        <span className="font-semibold text-green-600">💡 Research Tip:</span>{" "}
+                                                        <span className="text-[var(--muted-foreground)]">{instr.researchTip}</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </motion.div>
+                                );
+                            })}
                         </div>
                     </motion.div>
                 )}
