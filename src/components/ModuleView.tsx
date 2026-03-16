@@ -272,30 +272,58 @@ export default function ModuleView({
                                             </a>
                                         </div>
                                         {instr && (
-                                            <div className="p-4 grid md:grid-cols-2 gap-4">
-                                                <div>
-                                                    <h6 className="text-xs font-semibold uppercase tracking-wide text-indigo-500 mb-2">📋 How to Use</h6>
-                                                    <ol className="space-y-1.5">
-                                                        {instr.howToUse.map((step, si) => (
-                                                            <li key={si} className="text-xs text-[var(--muted-foreground)] flex items-start gap-2">
-                                                                <span className="text-indigo-400 font-bold shrink-0">{si + 1}.</span>
-                                                                <span>{step}</span>
-                                                            </li>
-                                                        ))}
-                                                    </ol>
+                                            <div className="p-4 space-y-4">
+                                                <div className="grid md:grid-cols-2 gap-4">
+                                                    <div className="p-3 rounded-lg bg-indigo-500/5 border border-indigo-500/10">
+                                                        <h6 className="text-xs font-semibold uppercase tracking-wide text-indigo-500 mb-2">📋 How to Use (Step-by-Step)</h6>
+                                                        <ol className="space-y-2">
+                                                            {instr.howToUse.map((step, si) => (
+                                                                <li key={si} className="text-xs text-[var(--muted-foreground)] flex items-start gap-2">
+                                                                    <span className="bg-indigo-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">{si + 1}</span>
+                                                                    <span>{step}</span>
+                                                                </li>
+                                                            ))}
+                                                        </ol>
+                                                    </div>
+                                                    <div className="p-3 rounded-lg bg-amber-500/5 border border-amber-500/10">
+                                                        <h6 className="text-xs font-semibold uppercase tracking-wide text-amber-500 mb-2">🔍 Interpreting Output</h6>
+                                                        <ul className="space-y-2">
+                                                            {instr.interpretOutput.map((tip, ti) => (
+                                                                <li key={ti} className="text-xs text-[var(--muted-foreground)] flex items-start gap-2">
+                                                                    <span className="text-amber-400 shrink-0 mt-0.5">▸</span>
+                                                                    <span>{tip}</span>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <h6 className="text-xs font-semibold uppercase tracking-wide text-amber-500 mb-2">🔍 Interpreting Output</h6>
-                                                    <ul className="space-y-1.5">
-                                                        {instr.interpretOutput.map((tip, ti) => (
-                                                            <li key={ti} className="text-xs text-[var(--muted-foreground)] flex items-start gap-2">
-                                                                <span className="text-amber-400 shrink-0">▸</span>
-                                                                <span>{tip}</span>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                                <div className="md:col-span-2 p-3 rounded-lg bg-gradient-to-r from-green-500/5 to-emerald-500/5 border border-green-500/10">
+                                                {instr.dos && instr.donts && (
+                                                    <div className="grid md:grid-cols-2 gap-4">
+                                                        <div className="p-3 rounded-lg bg-green-500/5 border border-green-500/10">
+                                                            <h6 className="text-xs font-semibold uppercase tracking-wide text-green-600 mb-2">✅ Do This</h6>
+                                                            <ul className="space-y-2">
+                                                                {instr.dos.map((d, di) => (
+                                                                    <li key={di} className="text-xs text-[var(--muted-foreground)] flex items-start gap-2">
+                                                                        <span className="text-green-500 shrink-0 mt-0.5">✓</span>
+                                                                        <span>{d}</span>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                        <div className="p-3 rounded-lg bg-red-500/5 border border-red-500/10">
+                                                            <h6 className="text-xs font-semibold uppercase tracking-wide text-red-500 mb-2">❌ Don&apos;t Do This</h6>
+                                                            <ul className="space-y-2">
+                                                                {instr.donts.map((d, di) => (
+                                                                    <li key={di} className="text-xs text-[var(--muted-foreground)] flex items-start gap-2">
+                                                                        <span className="text-red-500 shrink-0 mt-0.5">✗</span>
+                                                                        <span>{d}</span>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                <div className="p-3 rounded-lg bg-gradient-to-r from-green-500/5 to-emerald-500/5 border border-green-500/10">
                                                     <p className="text-xs">
                                                         <span className="font-semibold text-green-600">💡 Research Tip:</span>{" "}
                                                         <span className="text-[var(--muted-foreground)]">{instr.researchTip}</span>
