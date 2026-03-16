@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Props {
     type: string;
@@ -26,6 +26,7 @@ export default function InteractiveActivity({ type, moduleId }: Props) {
         case "proposalWorkshop": return <ProposalWorkshop />;
         case "trlAssessment": return <TRLAssessment />;
         case "startupReadiness": return <StartupReadiness />;
+        case "startupMindmap": return <StartupMindmap />;
         default: return <div className="p-4 text-sm text-[var(--muted-foreground)]">Activity: {type}</div>;
     }
 }
@@ -837,6 +838,154 @@ function StartupReadiness() {
                     <div className={`h-full rounded-full transition-all ${score >= 7 ? "bg-green-500" : score >= 4 ? "bg-yellow-500" : "bg-red-500"}`}
                         style={{ width: `${(score / 8) * 100}%` }} />
                 </div>
+            </div>
+        </div>
+    );
+}
+
+function StartupMindmap() {
+    const steps = [
+        {
+            id: "idea",
+            title: "1. Problem Discovery",
+            cost: "₹0",
+            icon: "💡",
+            narrative: "Identify a real-world problem from your research. Use Google Scholar to see if it's solved. Use Google Forms for free market validation.",
+            roi: "High - Building on a real need ensures users will want it.",
+            details: "Focus on 'Pain Points' rather than 'Nice to have' features."
+        },
+        {
+            id: "ip",
+            title: "2. Zero-Cost Protection",
+            cost: "₹0 - ₹1750",
+            icon: "🛡️",
+            narrative: "Search IPIndia for free. Draft a provisional patent yourself using online guides. This protects your idea for 12 months at minimum cost.",
+            roi: "Maximum - Protects your IP while you build the prototype.",
+            details: "A provisional patent gives you 'Patent Pending' status immediately."
+        },
+        {
+            id: "prototype",
+            title: "3. Open-Source Build",
+            cost: "₹0",
+            icon: "🛠️",
+            narrative: "Use Python, GitHub, and Kaggle (Free GPU). Use free tiers of Vercel/Firebase for hosting. Don't buy hardware until the code works.",
+            roi: "High - No initial investment, only your time and skills.",
+            details: "Iterate fast. Fix bugs before they cost money."
+        },
+        {
+            id: "grants",
+            title: "4. Gov & NGO Support",
+            cost: "₹0",
+            icon: "🏛️",
+            narrative: "Register on Startup India. Apply for student-specific grants like NIDHI-EIR or BIRAC-BIG. These are non-equity grants (free money).",
+            roi: "Maximum - Capital without giving away ownership (equity).",
+            details: "Many NGOs also provide free mentoring and labs for students."
+        },
+        {
+            id: "mvp",
+            title: "5. The Lean MVP",
+            cost: "Low",
+            icon: "🚀",
+            narrative: "Build the simplest version that solves the core problem. Use free social media for marketing. Get feedback from early users.",
+            roi: "High - Early feedback prevents building expensive, unwanted features.",
+            details: "MVP = Minimum Viable Product. Focus on value, not features."
+        },
+        {
+            id: "audit",
+            title: "6. ROI & Audit",
+            cost: "₹0",
+            icon: "📊",
+            narrative: "Track every rupee. Conduct an annual self-audit. If an expense doesn't lead to more users or better product, cut it.",
+            roi: "Essential - Maintains cash flow and ensures sustainable growth.",
+            details: "Financial discipline is the secret to startup survival."
+        }
+    ];
+
+    const [activeStep, setActiveStep] = useState<string | null>(null);
+
+    return (
+        <div className="space-y-6">
+            <div className="p-5 rounded-xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20">
+                <h4 className="text-lg font-bold mb-2 text-indigo-500 text-center">🌟 The Zero-to-One Narrative</h4>
+                <p className="text-sm text-[var(--muted-foreground)] leading-relaxed text-center italic">
+                    &quot;Your research is the spark. By following this lean, low-cost path, you can transform a classroom idea into a real-world startup. 
+                    The secret? Use free resources, validate early, and never spend a rupee before you've proven the value.&quot;
+                </p>
+            </div>
+            
+            <p className="text-xs text-[var(--muted-foreground)] text-center mb-4 uppercase tracking-widest font-semibold">
+                Interactive Journey Map
+            </p>
+
+            <div className="relative">
+                {/* Connection Line (Mobile: Vertical, Desktop: Zigzag) */}
+                <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-500/20 via-pink-500/20 to-purple-500/20 -translate-x-1/2 hidden md:block" />
+
+                <div className="grid md:grid-cols-2 gap-x-12 gap-y-8 relative">
+                    {steps.map((step, i) => (
+                        <motion.div
+                            key={step.id}
+                            initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.1 }}
+                            className={`relative flex flex-col ${i % 2 === 0 ? "md:items-end text-right" : "md:items-start text-left"}`}
+                        >
+                            {/* Connector Node */}
+                            <div className="absolute top-6 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-white border-2 border-pink-500 z-10 hidden md:block" />
+
+                            <button
+                                onClick={() => setActiveStep(activeStep === step.id ? null : step.id)}
+                                className={`w-full max-w-sm p-4 rounded-xl border transition-all duration-300 ${activeStep === step.id
+                                    ? "bg-gradient-to-br from-purple-500 to-pink-500 text-white border-transparent shadow-lg scale-105"
+                                    : "bg-[var(--secondary)] border-[var(--border)] hover:border-pink-500"
+                                    }`}
+                            >
+                                <div className="flex items-center gap-3 mb-2">
+                                    <span className={`text-2xl p-2 rounded-lg ${activeStep === step.id ? "bg-white/20" : "bg-white dark:bg-zinc-800 shadow-sm"}`}>
+                                        {step.icon}
+                                    </span>
+                                    <div className="flex-1 text-left">
+                                        <h4 className="font-bold text-sm">{step.title}</h4>
+                                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${activeStep === step.id ? "bg-white/20" : "bg-pink-500/10 text-pink-500"}`}>
+                                            Cost: {step.cost}
+                                        </span>
+                                    </div>
+                                </div>
+                                <p className={`text-xs line-clamp-2 ${activeStep === step.id ? "text-white/90" : "text-[var(--muted-foreground)]"}`}>
+                                    {step.narrative}
+                                </p>
+                            </button>
+
+                            <AnimatePresence mode="wait">
+                                {activeStep === step.id && (
+                                    <motion.div
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: "auto" }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        className="mt-3 w-full max-w-sm text-left overflow-hidden"
+                                    >
+                                        <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+                                            <div>
+                                                <h5 className="text-[10px] font-bold uppercase tracking-wider text-pink-500">Maximum ROI Strategy</h5>
+                                                <p className="text-xs">{step.roi}</p>
+                                            </div>
+                                            <div>
+                                                <h5 className="text-[10px] font-bold uppercase tracking-wider text-purple-500">Pro Tip</h5>
+                                                <p className="text-xs italic">{step.details}</p>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 text-center">
+                <p className="text-sm font-medium">
+                    🏆 <span className="text-purple-600 dark:text-purple-400">The Golden Rule:</span> Excellence in research is the best foundation for a high-ROI startup.
+                </p>
             </div>
         </div>
     );

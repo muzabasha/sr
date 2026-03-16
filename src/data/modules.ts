@@ -21,6 +21,13 @@ export interface AITool {
     researchTip?: string;
 }
 
+export interface CaseStudyItem {
+    title: string;
+    type: "success" | "failure";
+    story: string;
+    lesson: string;
+}
+
 export interface Module {
     id: number;
     title: string;
@@ -33,6 +40,7 @@ export interface Module {
     quiz: QuizQuestion[];
     doAndDont: DoAndDont;
     caseStudy: string;
+    caseStudies?: CaseStudyItem[];
     ethicsCheckpoint: string;
     aiTools: AITool[];
 }
@@ -135,6 +143,11 @@ export const modules: Module[] = [
             ]
         },
         caseStudy: "Ravi, a 2nd-year undergraduate, was curious about why his grandmother's blood pressure monitor sometimes gave inaccurate readings. Instead of just complaining, he started researching wearable health sensors. This curiosity led him to publish a paper on 'Improving Blood Pressure Monitoring Accuracy using Multi-Sensor Fusion' in an IEEE conference.",
+        caseStudies: [
+            { title: "Ravi's Curiosity Became a Published Paper", type: "success", story: "Ravi, a 2nd-year undergraduate, noticed his grandmother's blood pressure monitor gave inaccurate readings. Instead of ignoring it, he asked 'Why does this happen?' He started reading about wearable health sensors, found that single-sensor devices have accuracy issues, and proposed a multi-sensor fusion approach. He published his findings at an IEEE conference and won the Best Student Paper award.", lesson: "Every great research journey starts with a simple 'Why?' question from daily life. Ravi didn't need a lab or funding to start — just curiosity and Google Scholar." },
+            { title: "Neha Chose a Trendy Topic She Didn't Care About", type: "failure", story: "Neha picked 'Blockchain in Supply Chain' because it was trending on LinkedIn. She had zero interest in blockchain or supply chains. After 3 months, she couldn't motivate herself to read papers, her literature review was shallow, and her advisor noticed her lack of depth. She eventually abandoned the topic and lost 3 months.", lesson: "Never choose a research topic just because it's trendy. Genuine curiosity sustains you through the hard months of research. Pick something YOU care about." },
+            { title: "Arun's Gaming Hobby Became AI Research", type: "success", story: "Arun loved playing video games and was told 'gaming is a waste of time.' He channeled his passion into researching AI for game design — specifically, procedural content generation using reinforcement learning. His unique perspective as a gamer gave him insights that pure CS researchers missed. His paper was accepted at a top game AI workshop.", lesson: "Your hobbies and interests are not distractions — they're potential research domains. The intersection of your passion and technology is where original research happens." }
+        ],
         ethicsCheckpoint: "Before starting your research journey, commit to the Research Integrity Pledge: I will conduct research honestly, give proper credit, use AI tools responsibly, and never fabricate or plagiarize data.",
         aiTools: [
             { name: "ChatGPT (Free)", url: "https://chat.openai.com", description: "Brainstorm research interests, explore domains, and get explanations of unfamiliar fields", category: "Brainstorming", freeTag: "Free tier available" },
@@ -216,6 +229,11 @@ export const modules: Module[] = [
             dont: ["Choose a topic just because it sounds impressive", "Pick an overly broad or vague topic", "Ignore your genuine interests", "Let AI choose your research topic for you"]
         },
         caseStudy: "Priya noticed her farmer father struggling with crop diseases. Her curiosity about 'Why can't we detect plant diseases early?' led her to the domain of Agricultural AI. She developed a mobile app using CNN-based image classification for early detection of tomato leaf diseases, which won a national hackathon.",
+        caseStudies: [
+            { title: "Priya's Farm Problem Became a National Award", type: "success", story: "Priya noticed her farmer father struggling to identify crop diseases early. Her curiosity — 'Why can't we detect plant diseases early using a phone camera?' — led her to Agricultural AI. She built a CNN-based mobile app for tomato leaf disease detection using a Kaggle dataset. The app won a national hackathon, got incubated at her university, and is now used by 500+ farmers in Karnataka.", lesson: "The best research topics come from real problems you've personally witnessed. Priya didn't need a fancy lab — she needed a phone camera, a dataset, and genuine motivation." },
+            { title: "Suresh Picked 'AI in Healthcare' Without Narrowing Down", type: "failure", story: "Suresh chose 'Artificial Intelligence in Healthcare' as his research topic. When his advisor asked 'Which disease? Which AI method? Which data?', he had no answers. He spent 4 months reading hundreds of papers across cancer, diabetes, mental health, and radiology without focus. He never published because he couldn't narrow down to a specific, achievable research question.", lesson: "'AI in Healthcare' is a field, not a research topic. Always narrow down: Which disease? Which AI technique? Which type of data? Which patient population? Specificity is the key to achievable research." },
+            { title: "Kavya Connected Two Unrelated Interests", type: "success", story: "Kavya loved music and was studying Computer Science. She combined both by researching 'AI-based Raga Recognition in Indian Classical Music.' Nobody in her department had worked on this, but she found 15 papers on music information retrieval. Her unique angle — applying deep learning to a culturally specific music system — got published in a Springer journal.", lesson: "Don't limit yourself to 'standard' research topics. Combining two seemingly unrelated interests often creates the most original and publishable research." }
+        ],
         ethicsCheckpoint: "When using AI to explore research topics, always verify the suggestions against real-world problems. AI can suggest topics, but the genuine interest and validation must come from you.",
         aiTools: [
             { name: "Semantic Scholar", url: "https://www.semanticscholar.org", description: "AI-powered academic search engine to discover trending research topics and papers", category: "Topic Discovery", freeTag: "Free" },
@@ -308,6 +326,11 @@ export const modules: Module[] = [
             dont: ["Generate fake references using AI", "Copy AI text directly into your paper", "Submit AI-generated work as original", "Use AI to fabricate or manipulate data"]
         },
         caseStudy: "A PhD student used ChatGPT to generate references for their thesis. The examiner discovered that 40% of the cited papers didn't exist. The student's degree was revoked, and they were banned from the university. This could have been avoided by simply verifying each reference.",
+        caseStudies: [
+            { title: "PhD Student's Degree Revoked for Fake AI References", type: "failure", story: "A PhD student used ChatGPT to generate 30 references for their thesis literature review. They didn't verify any of them. During the viva voce, the examiner searched for 5 random references — 3 didn't exist at all (ChatGPT had hallucinated them). The university revoked the degree, banned the student, and the case was reported to the national academic integrity board.", lesson: "NEVER trust AI-generated references without verification. Every single reference must be verified on Google Scholar or the publisher's website. Fake references = academic fraud = career destruction." },
+            { title: "Anita Used AI Ethically and Got Published Faster", type: "success", story: "Anita used ChatGPT to brainstorm research directions and understand complex concepts. She always verified AI suggestions against real papers, wrote everything in her own words, and added a transparency statement: 'ChatGPT was used for initial brainstorming. All content was independently verified and written by the authors.' Her paper was accepted at an IEEE conference, and the reviewer specifically praised her ethical AI disclosure.", lesson: "Using AI tools is not wrong — using them without transparency is. Disclose your AI usage, verify everything, and write in your own words. Ethical AI use can actually speed up your research." },
+            { title: "Student Submitted AI-Generated Abstract and Got Caught", type: "failure", story: "Rohan asked ChatGPT to write his paper's abstract. He submitted it without changes. The journal used an AI detection tool (GPTZero) and flagged the abstract as 95% AI-generated. The paper was desk-rejected with a note: 'Suspected AI-generated content.' Rohan's name was flagged in the journal's system, making future submissions harder.", lesson: "Journals are increasingly using AI detection tools. Even if the content is factually correct, submitting AI-written text as your own is plagiarism. Use AI to understand and brainstorm, then write everything yourself." }
+        ],
         ethicsCheckpoint: "Before using any AI tool in your research, ask yourself: 'Am I using this to enhance my understanding, or to replace my thinking?' If it's the latter, stop.",
         aiTools: [
             { name: "Grammarly", url: "https://www.grammarly.com", description: "AI-powered grammar and clarity checker — ethical for polishing your own writing", category: "Writing Aid", freeTag: "Free tier available" },
@@ -391,6 +414,11 @@ export const modules: Module[] = [
             dont: ["Rely only on Google for academic search", "Ignore citation networks", "Use only the first page of results", "Skip reading abstracts before downloading"]
         },
         caseStudy: "Amit was researching 'sentiment analysis' but found thousands of irrelevant papers. By using Boolean search ('sentiment analysis' AND 'social media' AND 'deep learning' NOT 'product reviews') on Scopus, he narrowed results to 47 highly relevant papers and completed his literature review in 2 weeks instead of 2 months.",
+        caseStudies: [
+            { title: "Amit Mastered Boolean Search and Saved 6 Weeks", type: "success", story: "Amit was drowning in 3,000+ results for 'sentiment analysis' on Google Scholar. His advisor taught him Boolean operators. He searched: ('sentiment analysis' AND 'social media' AND 'deep learning' NOT 'product reviews') on Scopus. Results dropped to 47 highly relevant papers. He completed his literature review in 2 weeks instead of the 2 months he'd been struggling.", lesson: "Learning Boolean search operators (AND, OR, NOT, quotes) is the single most time-saving skill in research. 10 minutes learning these operators saves weeks of reading irrelevant papers." },
+            { title: "Deepa Only Used Google (Not Google Scholar)", type: "failure", story: "Deepa searched her research topic on regular Google instead of Google Scholar. She found blog posts, Wikipedia articles, and news stories. She cited 3 blog posts and a Wikipedia page in her paper. The reviewer rejected it immediately, writing: 'The literature review cites non-academic sources. This is unacceptable for a research paper.'", lesson: "Regular Google is NOT a research database. Always use Google Scholar, Scopus, IEEE Xplore, or PubMed for academic papers. Blog posts and Wikipedia are for understanding, not for citing." },
+            { title: "Farhan Used Citation Tracking to Find His Entire Literature", type: "success", story: "Farhan found one excellent 2020 paper on his topic. He clicked 'Cited by' on Google Scholar and found 85 papers that cited it. He then checked the references of those papers (backward citation). In 3 days, he had a complete map of 40 key papers spanning 2018-2024, organized by method, dataset, and results.", lesson: "The 'Cited by' feature is the most powerful tool in Google Scholar. Start with one good paper, go forward (who cited it?) and backward (what did it cite?), and you'll find your entire literature." }
+        ],
         ethicsCheckpoint: "When using AI to search for papers, always verify that the papers actually exist. AI tools sometimes hallucinate paper titles and authors.",
         aiTools: [
             { name: "Google Scholar", url: "https://scholar.google.com", description: "The most widely used free academic search engine with citation tracking", category: "Paper Search", freeTag: "Free" },
@@ -1253,11 +1281,11 @@ export const modules: Module[] = [
     {
         id: 17,
         title: "From Research to Startup",
-        subtitle: "Commercializing Your Research",
-        icon: "🏢",
+        subtitle: "A Student's Complete Guide to Building a Startup from Scratch — Even from 10th Standard",
+        icon: "🚀",
         color: "from-purple-600 to-pink-500",
-        analogy: "Converting research to a startup is like turning a recipe into a restaurant — the recipe (research) must be proven, the kitchen (prototype) must work, and customers (market) must want it.",
-        overview: "Learn the pathway from academic research to a successful startup in the Indian ecosystem.",
+        analogy: "Starting a startup is like planting a mango tree — you start with a tiny seed (idea), nurture it with water and sunlight (effort and mentorship), protect it from pests (avoid wasteful spending), and eventually it gives fruit (revenue). The key is patience, smart care, and not spending money on things the tree doesn't need yet.",
+        overview: "This module teaches you how to turn your research idea into a real startup — step by step, with almost zero cost. You will learn how to get free help from NGOs, government schemes, and incubators. You will understand how to keep costs low, track every rupee, conduct annual audits, and maximize your return on investment (ROI). Written for students as young as 10th standard — no business degree needed.",
         slides: [
             {
                 title: "The Research-to-Startup Pipeline",
@@ -1293,6 +1321,12 @@ export const modules: Module[] = [
                 content: "Evaluate if your research is ready for commercialization.",
                 type: "interactive",
                 interactiveType: "startupReadiness"
+            },
+            {
+                title: "Narrative Flow: Idea to Startup",
+                content: "A step-by-step procedure to build your startup with minimum cost and maximum ROI.",
+                type: "interactive",
+                interactiveType: "startupMindmap"
             }
         ],
         quiz: [
