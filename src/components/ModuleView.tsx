@@ -1,7 +1,7 @@
 "use client";
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { modules, type Slide } from "@/data/modules";
+import { modules, type Slide, type CaseStudyItem } from "@/data/modules";
 import { useApp } from "@/context/AppContext";
 import { getToolInstructions } from "@/data/toolInstructions";
 import QuizEngine from "./QuizEngine";
@@ -193,9 +193,55 @@ export default function ModuleView({
 
                 {activeTab === "casestudy" && (
                     <motion.div key="case" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                        <div className="p-6 rounded-xl bg-[var(--card)] border border-[var(--border)]">
-                            <h3 className="text-xl font-bold mb-4">📋 Real-World Case Study</h3>
-                            <p className="text-[var(--muted-foreground)] leading-relaxed">{mod.caseStudy}</p>
+                        <div className="space-y-6">
+                            {/* Legacy single case study */}
+                            {mod.caseStudy && (
+                                <div className="p-6 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+                                    <h3 className="text-xl font-bold mb-4">📋 Real-World Case Study</h3>
+                                    <p className="text-[var(--muted-foreground)] leading-relaxed">{mod.caseStudy}</p>
+                                </div>
+                            )}
+                            {/* Rich case studies */}
+                            {mod.caseStudies && mod.caseStudies.length > 0 && (
+                                <div className="space-y-4">
+                                    <h3 className="text-xl font-bold">📚 Detailed Case Studies</h3>
+                                    {mod.caseStudies.map((cs: CaseStudyItem, i: number) => (
+                                        <motion.div
+                                            key={i}
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: i * 0.1 }}
+                                            className={`p-5 rounded-xl border ${cs.type === "success"
+                                                ? "bg-green-500/5 border-green-500/20"
+                                                : "bg-red-500/5 border-red-500/20"
+                                                }`}
+                                        >
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <span className={`text-lg ${cs.type === "success" ? "text-green-500" : "text-red-500"}`}>
+                                                    {cs.type === "success" ? "✅" : "❌"}
+                                                </span>
+                                                <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${cs.type === "success"
+                                                    ? "bg-green-500/10 text-green-600"
+                                                    : "bg-red-500/10 text-red-600"
+                                                    }`}>
+                                                    {cs.type === "success" ? "SUCCESS STORY" : "FAILURE LESSON"}
+                                                </span>
+                                                <h4 className="font-semibold text-sm">{cs.title}</h4>
+                                            </div>
+                                            <p className="text-sm text-[var(--muted-foreground)] leading-relaxed mb-3">{cs.story}</p>
+                                            <div className={`p-3 rounded-lg ${cs.type === "success"
+                                                ? "bg-green-500/10"
+                                                : "bg-red-500/10"
+                                                }`}>
+                                                <p className="text-xs">
+                                                    <span className="font-semibold">{cs.type === "success" ? "💡 Key Takeaway:" : "⚠️ Lesson Learned:"}</span>{" "}
+                                                    <span className="text-[var(--muted-foreground)]">{cs.lesson}</span>
+                                                </p>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </motion.div>
                 )}
