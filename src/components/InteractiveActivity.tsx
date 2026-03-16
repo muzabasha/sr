@@ -859,45 +859,99 @@ function StartupMindmap() {
             title: "2. Zero-Cost Protection",
             cost: "₹0 - ₹1750",
             icon: "🛡️",
-            narrative: "Search IPIndia for free. Draft a provisional patent yourself using online guides. This protects your idea for 12 months at minimum cost.",
+            narrative: "Search IPIndia for free. Draft a provisional patent yourself for ₹1,750. This protects your idea for 12 months with 'Patent Pending' status.",
             roi: "Maximum - Protects your IP while you build the prototype.",
-            details: "A provisional patent gives you 'Patent Pending' status immediately."
+            details: "A provisional patent gives you time to find investors without losing your rights."
         },
         {
-            id: "prototype",
-            title: "3. Open-Source Build",
+            id: "open-source",
+            title: "3. Open-Source Prototyping",
             cost: "₹0",
             icon: "🛠️",
-            narrative: "Use Python, GitHub, and Kaggle (Free GPU). Use free tiers of Vercel/Firebase for hosting. Don't buy hardware until the code works.",
+            narrative: "Use Python, GitHub, and Kaggle (Free GPU). Use free tiers of Vercel/Firebase for hosting. Build only what is necessary to prove the concept.",
             roi: "High - No initial investment, only your time and skills.",
             details: "Iterate fast. Fix bugs before they cost money."
         },
         {
+            id: "student-perks",
+            title: "4. Student Dev Perks",
+            cost: "₹0",
+            icon: "🎓",
+            narrative: "Sign up for 'GitHub Student Developer Pack'. Get free AWS/Azure credits, free domains, and access to premium tools worth $10,000+ for free.",
+            roi: "Infinite - Accessing professional infrastructure at zero cost.",
+            details: "Your .edu email is your most valuable financial asset as a student founder."
+        },
+        {
             id: "grants",
-            title: "4. Gov & NGO Support",
+            title: "5. Gov & NGO Support",
             cost: "₹0",
             icon: "🏛️",
-            narrative: "Register on Startup India. Apply for student-specific grants like NIDHI-EIR or BIRAC-BIG. These are non-equity grants (free money).",
+            narrative: "Register on Startup India. Apply for NIDHI-EIR or BIRAC-BIG grants. These provide monthly stipends or prototype funds of ₹5-50 Lakhs.",
             roi: "Maximum - Capital without giving away ownership (equity).",
-            details: "Many NGOs also provide free mentoring and labs for students."
+            details: "Non-dilutive funding is the 'Holy Grail' of startup capital."
         },
         {
             id: "mvp",
-            title: "5. The Lean MVP",
+            title: "6. The Lean MVP",
             cost: "Low",
             icon: "🚀",
-            narrative: "Build the simplest version that solves the core problem. Use free social media for marketing. Get feedback from early users.",
+            narrative: "Build the simplest version (Minimum Viable Product). Focus on one 'Killer Feature'. Use free social media (LinkedIn/Twitter) for early buzz.",
             roi: "High - Early feedback prevents building expensive, unwanted features.",
-            details: "MVP = Minimum Viable Product. Focus on value, not features."
+            details: "If you aren't embarrassed by your first version, you've launched too late."
         },
         {
-            id: "audit",
-            title: "6. ROI & Audit",
+            id: "organic-marketing",
+            title: "7. Zero-Cost Marketing",
+            cost: "₹0",
+            icon: "📢",
+            narrative: "Don't buy ads. Write blog posts about your research journey. Create 'Learn in Public' videos on YouTube/Reels to build an audience organically.",
+            roi: "High - Community-led growth is more stable and cheaper than paid ads.",
+            details: "Content is currency. Your story is your most unique marketing asset."
+        },
+        {
+            id: "hiring",
+            title: "8. Equity-Based Hiring",
+            cost: "₹0",
+            icon: "👥",
+            narrative: "Can't pay salaries? Hire interns or co-founders for equity (ownership). Use portals like Internshala for high-quality student talent.",
+            roi: "High - Aligns team success with company success without burning cash.",
+            details: "A small piece of a big pie is better than 100% of nothing."
+        },
+        {
+            id: "roi-audit",
+            title: "9. Precise ROI Audit",
             cost: "₹0",
             icon: "📊",
-            narrative: "Track every rupee. Conduct an annual self-audit. If an expense doesn't lead to more users or better product, cut it.",
+            narrative: "Track every single rupee. Conduct an annual self-audit. Every expense must contribute to 'Customer Acquisition' or 'Product Quality'.",
             roi: "Essential - Maintains cash flow and ensures sustainable growth.",
-            details: "Financial discipline is the secret to startup survival."
+            details: "Frugality is a competitive advantage. Spend only on what moves the needle."
+        },
+        {
+            id: "sales",
+            title: "10. Direct B2B Sales",
+            cost: "Low",
+            icon: "💼",
+            narrative: "Reach out to businesses directly on LinkedIn. Offer a 'Free Trial' for your research-based solution. Convert trials to paying customers.",
+            roi: "Immediate - Cash flow from customers is better than cash from investors.",
+            details: "B2B (Business to Business) often has higher margins and lower churn."
+        },
+        {
+            id: "scale",
+            title: "11. Strategic Scaling",
+            cost: "Profits",
+            icon: "📈",
+            narrative: "Reinvest your profits. Only scale once you have 'Unit Economics' (you make more from a customer than it costs to find them).",
+            roi: "Compounding - Stable, profitable growth leads to a world-class company.",
+            details: "Premature scaling is the #1 reason startups fail. Grow only when you are ready."
+        },
+        {
+            id: "exit",
+            title: "12. High-Value Exit",
+            cost: "External",
+            icon: "🏁",
+            narrative: "With a stable, research-backed product, decide: Scale globally or be acquired by a tech giant. Your IP makes you a premium target.",
+            roi: "Maximum - This is the ultimate financial reward for years of innovation.",
+            details: "An acquisition (Exit) provides the liquidity to start your next big venture."
         }
     ];
 
@@ -905,21 +959,21 @@ function StartupMindmap() {
 
     return (
         <div className="space-y-6">
-            <div className="p-5 rounded-xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20">
+            <div className="p-5 rounded-xl bg-linear-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20">
                 <h4 className="text-lg font-bold mb-2 text-indigo-500 text-center">🌟 The Zero-to-One Narrative</h4>
-                <p className="text-sm text-[var(--muted-foreground)] leading-relaxed text-center italic">
+                <p className="text-sm text-(--muted-foreground) leading-relaxed text-center italic">
                     &quot;Your research is the spark. By following this lean, low-cost path, you can transform a classroom idea into a real-world startup. 
                     The secret? Use free resources, validate early, and never spend a rupee before you've proven the value.&quot;
                 </p>
             </div>
             
-            <p className="text-xs text-[var(--muted-foreground)] text-center mb-4 uppercase tracking-widest font-semibold">
+            <p className="text-xs text-(--muted-foreground) text-center mb-4 uppercase tracking-widest font-semibold">
                 Interactive Journey Map
             </p>
 
             <div className="relative">
                 {/* Connection Line (Mobile: Vertical, Desktop: Zigzag) */}
-                <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-500/20 via-pink-500/20 to-purple-500/20 -translate-x-1/2 hidden md:block" />
+                <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-purple-500/20 via-pink-500/20 to-purple-500/20 -translate-x-1/2 hidden md:block" />
 
                 <div className="grid md:grid-cols-2 gap-x-12 gap-y-8 relative">
                     {steps.map((step, i) => (
@@ -936,8 +990,8 @@ function StartupMindmap() {
                             <button
                                 onClick={() => setActiveStep(activeStep === step.id ? null : step.id)}
                                 className={`w-full max-w-sm p-4 rounded-xl border transition-all duration-300 ${activeStep === step.id
-                                    ? "bg-gradient-to-br from-purple-500 to-pink-500 text-white border-transparent shadow-lg scale-105"
-                                    : "bg-[var(--secondary)] border-[var(--border)] hover:border-pink-500"
+                                    ? "bg-linear-to-br from-purple-500 to-pink-500 text-white border-transparent shadow-lg scale-105"
+                                    : "bg-(--secondary) border-(--border) hover:border-pink-500"
                                     }`}
                             >
                                 <div className="flex items-center gap-3 mb-2">
@@ -951,7 +1005,7 @@ function StartupMindmap() {
                                         </span>
                                     </div>
                                 </div>
-                                <p className={`text-xs line-clamp-2 ${activeStep === step.id ? "text-white/90" : "text-[var(--muted-foreground)]"}`}>
+                                <p className={`text-xs line-clamp-2 ${activeStep === step.id ? "text-white/90" : "text-(--muted-foreground)"}`}>
                                     {step.narrative}
                                 </p>
                             </button>
@@ -982,7 +1036,7 @@ function StartupMindmap() {
                 </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 text-center">
+            <div className="p-4 rounded-xl bg-linear-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 text-center">
                 <p className="text-sm font-medium">
                     🏆 <span className="text-purple-600 dark:text-purple-400">The Golden Rule:</span> Excellence in research is the best foundation for a high-ROI startup.
                 </p>
