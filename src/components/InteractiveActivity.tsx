@@ -852,7 +852,9 @@ function StartupMindmap() {
             icon: "💡",
             narrative: "Identify a real-world problem from your research. Use Google Scholar to see if it's solved. Use Google Forms for free market validation.",
             roi: "High - Building on a real need ensures users will want it.",
-            details: "Focus on 'Pain Points' rather than 'Nice to have' features."
+            details: "Focus on 'Pain Points' rather than 'Nice to have' features.",
+            successCase: "A student surveyed 200 farmers first; found they only needed SMS alerts, not an app. Result: Zero wasted code.",
+            failureCase: "Team built a 'Smart Fridge' for 6 months; realized nobody wanted to pay $500 for milk alerts. Result: 6 months lost."
         },
         {
             id: "ip",
@@ -861,7 +863,9 @@ function StartupMindmap() {
             icon: "🛡️",
             narrative: "Search IPIndia for free. Draft a provisional patent yourself for ₹1,750. This protects your idea for 12 months with 'Patent Pending' status.",
             roi: "Maximum - Protects your IP while you build the prototype.",
-            details: "A provisional patent gives you time to find investors without losing your rights."
+            details: "A provisional patent gives you time to find investors without losing your rights.",
+            successCase: "Team filed for ₹1750; used 'Patent Pending' status to win a ₹1 Lakh competition prize.",
+            failureCase: "Inventor shared the secret on a blog; a competitor patented it first and legally banned the original inventor."
         },
         {
             id: "open-source",
@@ -870,7 +874,9 @@ function StartupMindmap() {
             icon: "🛠️",
             narrative: "Use Python, GitHub, and Kaggle (Free GPU). Use free tiers of Vercel/Firebase for hosting. Build only what is necessary to prove the concept.",
             roi: "High - No initial investment, only your time and skills.",
-            details: "Iterate fast. Fix bugs before they cost money."
+            details: "Iterate fast. Fix bugs before they cost money.",
+            successCase: "Used Kaggle's free GPU to build a diagnostic AI prototype in 2 weeks for ₹0.",
+            failureCase: "Team spent ₹2 Lakhs on servers before testing code; servers sat idle as the project hit a logic roadblock."
         },
         {
             id: "student-perks",
@@ -879,7 +885,9 @@ function StartupMindmap() {
             icon: "🎓",
             narrative: "Sign up for 'GitHub Student Developer Pack'. Get free AWS/Azure credits, free domains, and access to premium tools worth $10,000+ for free.",
             roi: "Infinite - Accessing professional infrastructure at zero cost.",
-            details: "Your .edu email is your most valuable financial asset as a student founder."
+            details: "Your .edu email is your most valuable financial asset as a student founder.",
+            successCase: "Used GitHub pack for free domain and $1k AWS credits; hosted the entire beta for 1 year for free.",
+            failureCase: "Group used personal cards for cloud; forgot alerts and got a ₹40,000 bill for a project with zero users."
         },
         {
             id: "grants",
@@ -888,7 +896,9 @@ function StartupMindmap() {
             icon: "🏛️",
             narrative: "Register on Startup India. Apply for NIDHI-EIR or BIRAC-BIG grants. These provide monthly stipends or prototype funds of ₹5-50 Lakhs.",
             roi: "Maximum - Capital without giving away ownership (equity).",
-            details: "Non-dilutive funding is the 'Holy Grail' of startup capital."
+            details: "Non-dilutive funding is the 'Holy Grail' of startup capital.",
+            successCase: "Received ₹30k/month stipend from NIDHI-EIR; allowed student to focus 100% on research-startup.",
+            failureCase: "Team ignored grand deadlines and docs; lost ₹25 Lakhs because they didn't have a registered entity."
         },
         {
             id: "mvp",
@@ -897,7 +907,9 @@ function StartupMindmap() {
             icon: "🚀",
             narrative: "Build the simplest version (Minimum Viable Product). Focus on one 'Killer Feature'. Use free social media (LinkedIn/Twitter) for early buzz.",
             roi: "High - Early feedback prevents building expensive, unwanted features.",
-            details: "If you aren't embarrassed by your first version, you've launched too late."
+            details: "If you aren't embarrassed by your first version, you've launched too late.",
+            successCase: "Launched a simple landing page; 1000 signups proved demand before even building the product.",
+            failureCase: "Built a suite with 50 features; users found it too complex and only wanted the core feature."
         },
         {
             id: "organic-marketing",
@@ -906,7 +918,9 @@ function StartupMindmap() {
             icon: "📢",
             narrative: "Don't buy ads. Write blog posts about your research journey. Create 'Learn in Public' videos on YouTube/Reels to build an audience organically.",
             roi: "High - Community-led growth is more stable and cheaper than paid ads.",
-            details: "Content is currency. Your story is your most unique marketing asset."
+            details: "Content is currency. Your story is your most unique marketing asset.",
+            successCase: "Posted 10 LinkedIn articles; grew to 5k followers and got 2 B2B inquiries for total ₹0 cost.",
+            failureCase: "Spent ₹50k on FB ads for a technical tool; got clicks but zero sales as audience was too broad."
         },
         {
             id: "hiring",
@@ -915,7 +929,9 @@ function StartupMindmap() {
             icon: "👥",
             narrative: "Can't pay salaries? Hire interns or co-founders for equity (ownership). Use portals like Internshala for high-quality student talent.",
             roi: "High - Aligns team success with company success without burning cash.",
-            details: "A small piece of a big pie is better than 100% of nothing."
+            details: "A small piece of a big pie is better than 100% of nothing.",
+            successCase: "Recruited 2 juniors for 5% equity; they worked harder than paid employees because they felt like owners.",
+            failureCase: "Hired an expensive 'Consultant' for cash; they didn't understand the vision and quit after 2 months."
         },
         {
             id: "roi-audit",
@@ -924,7 +940,9 @@ function StartupMindmap() {
             icon: "📊",
             narrative: "Track every single rupee. Conduct an annual self-audit. Every expense must contribute to 'Customer Acquisition' or 'Product Quality'.",
             roi: "Essential - Maintains cash flow and ensures sustainable growth.",
-            details: "Frugality is a competitive advantage. Spend only on what moves the needle."
+            details: "Frugality is a competitive advantage. Spend only on what moves the needle.",
+            successCase: "Cut ₹10k/month on vanity subs; used it to hire a specialist editor for their research paper.",
+            failureCase: "Team bought expensive merch and premium coffee; ran out of 'runway' right before a major trade fair."
         },
         {
             id: "sales",
@@ -933,7 +951,9 @@ function StartupMindmap() {
             icon: "💼",
             narrative: "Reach out to businesses directly on LinkedIn. Offer a 'Free Trial' for your research-based solution. Convert trials to paying customers.",
             roi: "Immediate - Cash flow from customers is better than cash from investors.",
-            details: "B2B (Business to Business) often has higher margins and lower churn."
+            details: "B2B (Business to Business) often has higher margins and lower churn.",
+            successCase: "Sent personalized videos to 20 CEOs; 2 signed up for paid pilots, funding next 6 months.",
+            failureCase: "Waited for customers to 'find' them; had zero sales for 4 months because they were shy to ask."
         },
         {
             id: "scale",
@@ -942,7 +962,9 @@ function StartupMindmap() {
             icon: "📈",
             narrative: "Reinvest your profits. Only scale once you have 'Unit Economics' (you make more from a customer than it costs to find them).",
             roi: "Compounding - Stable, profitable growth leads to a world-class company.",
-            details: "Premature scaling is the #1 reason startups fail. Grow only when you are ready."
+            details: "Premature scaling is the #1 reason startups fail. Grow only when you are ready.",
+            successCase: "Automated support using first profits; grew from 100 to 1k users without increasing headcount.",
+            failureCase: "Hired 10 sales people before product worked; high burn rate killed the company in 3 months."
         },
         {
             id: "exit",
@@ -951,7 +973,9 @@ function StartupMindmap() {
             icon: "🏁",
             narrative: "With a stable, research-backed product, decide: Scale globally or be acquired by a tech giant. Your IP makes you a premium target.",
             roi: "Maximum - This is the ultimate financial reward for years of innovation.",
-            details: "An acquisition (Exit) provides the liquidity to start your next big venture."
+            details: "An acquisition (Exit) provides the liquidity to start your next big venture.",
+            successCase: "Tech giant acquired startup for IP; founders stayed as VPs with a multi-crore exit.",
+            failureCase: "Refused a good buy-out offer, wanting to be 'Next Google'; year later, new tech made their IP obsolete."
         }
     ];
 
@@ -1019,6 +1043,17 @@ function StartupMindmap() {
                                         className="mt-3 w-full max-w-sm text-left overflow-hidden"
                                     >
                                         <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+                                            <div className="grid grid-cols-2 gap-3">
+                                                <div className="p-2 rounded-lg bg-green-500/10 border border-green-500/20">
+                                                    <h5 className="text-[9px] font-bold uppercase tracking-wider text-green-500 mb-1">Success Case</h5>
+                                                    <p className="text-[10px] leading-tight">{step.successCase}</p>
+                                                </div>
+                                                <div className="p-2 rounded-lg bg-red-500/10 border border-red-500/20">
+                                                    <h5 className="text-[9px] font-bold uppercase tracking-wider text-red-500 mb-1">Failure Case</h5>
+                                                    <p className="text-[10px] leading-tight">{step.failureCase}</p>
+                                                </div>
+                                            </div>
+
                                             <div>
                                                 <h5 className="text-[10px] font-bold uppercase tracking-wider text-pink-500">Maximum ROI Strategy</h5>
                                                 <p className="text-xs">{step.roi}</p>
