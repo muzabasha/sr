@@ -96,6 +96,12 @@ export const modules: Module[] = [
                 interactiveType: "selfAssessment"
             },
             {
+                title: "Module 1 Strategy Mindmap",
+                content: "Visualize your journey from curiosity to goal setting.",
+                type: "interactive",
+                interactiveType: "mindmap"
+            },
+            {
                 title: "Your Research Domain Map",
                 content: "Based on your interests, here are potential research domains you could explore.",
                 type: "diagram",
@@ -196,6 +202,12 @@ export const modules: Module[] = [
                 interactiveType: "topicGenerator"
             },
             {
+                title: "Topic Discovery Mindmap",
+                content: "A step-by-step procedure to finding your unique research domain.",
+                type: "interactive",
+                interactiveType: "mindmap"
+            },
+            {
                 title: "Research Domain Explorer",
                 content: "Explore trending research domains and find your fit.",
                 type: "comparison",
@@ -288,6 +300,12 @@ export const modules: Module[] = [
                 content: "Test your ethical judgment with real-world scenarios.",
                 type: "interactive",
                 interactiveType: "ethicsSimulator"
+            },
+            {
+                title: "Ethical AI Strategy Mindmap",
+                content: "How to balance AI assistance with research integrity.",
+                type: "interactive",
+                interactiveType: "mindmap"
             },
             {
                 title: "Ethical AI Guidelines for Researchers",
@@ -386,6 +404,12 @@ export const modules: Module[] = [
                 interactiveType: "searchBuilder"
             },
             {
+                title: "Literature Search Mindmap",
+                content: "The expert procedure for finding the needle in the haystack.",
+                type: "interactive",
+                interactiveType: "mindmap"
+            },
+            {
                 title: "Following Research Lineage",
                 content: "Track the evolution of research by following author groups and their publication history.",
                 type: "text",
@@ -474,7 +498,13 @@ export const modules: Module[] = [
                 content: "Drag and drop papers into the correct categories.",
                 type: "interactive",
                 interactiveType: "paperClassification"
-            }
+            },
+            {
+                title: "Paper Shortlisting Mindmap",
+                content: "The filter-down strategy for massive collections of research.",
+                type: "interactive",
+                interactiveType: "mindmap"
+            },
         ],
         quiz: [
             {
@@ -552,7 +582,13 @@ export const modules: Module[] = [
                 content: "Analyze a sample research paper by identifying its key sections and contributions.",
                 type: "interactive",
                 interactiveType: "paperAnalysis"
-            }
+            },
+            {
+                title: "Reading Strategy Mindmap",
+                content: "From bird's eye view to technical deep-dive.",
+                type: "interactive",
+                interactiveType: "mindmap"
+            },
         ],
         quiz: [
             {
@@ -628,7 +664,13 @@ export const modules: Module[] = [
                 content: "Analyze papers and identify the missing research problem.",
                 type: "interactive",
                 interactiveType: "gapIdentification"
-            }
+            },
+            {
+                title: "Gap Identification Mindmap",
+                content: "How to visually find where the research world stopped.",
+                type: "interactive",
+                interactiveType: "mindmap"
+            },
         ],
         quiz: [
             {
@@ -704,7 +746,13 @@ export const modules: Module[] = [
                 content: "Construct your own problem statement step by step.",
                 type: "interactive",
                 interactiveType: "problemStatementBuilder"
-            }
+            },
+            {
+                title: "Problem Statement Mindmap",
+                content: "Refining vague pain points into SMART research targets.",
+                type: "interactive",
+                interactiveType: "mindmap"
+            },
         ],
         quiz: [
             {
@@ -762,6 +810,12 @@ export const modules: Module[] = [
                 content: "Enter your research domain to discover top researchers.",
                 type: "interactive",
                 interactiveType: "expertFinder"
+            },
+            {
+                title: "Expert Connection Mindmap",
+                content: "The professional flow for building high-value research networks.",
+                type: "interactive",
+                interactiveType: "mindmap"
             },
             {
                 title: "Building Your Research Network",
@@ -847,7 +901,13 @@ export const modules: Module[] = [
                 content: "Use this interactive template to start drafting your paper.",
                 type: "interactive",
                 interactiveType: "paperDraftingTemplate"
-            }
+            },
+            {
+                title: "Paper Writing Mindmap",
+                content: "The narrative flow from skeleton draft to final polish.",
+                type: "interactive",
+                interactiveType: "mindmap"
+            },
         ],
         quiz: [
             {
@@ -915,6 +975,12 @@ export const modules: Module[] = [
                 content: "Answer questions to find the right venue for your research.",
                 type: "interactive",
                 interactiveType: "venueDecisionTree"
+            },
+            {
+                title: "Publication Strategy Mindmap",
+                content: "How to choose, verify, and target the right journal.",
+                type: "interactive",
+                interactiveType: "mindmap"
             },
             {
                 title: "Journal Quality Indicators",
@@ -1006,7 +1072,13 @@ export const modules: Module[] = [
                 content: "Submit a paper and see if it passes the editor's desk.",
                 type: "interactive",
                 interactiveType: "submissionSimulator"
-            }
+            },
+            {
+                title: "Desk-Rejection Defense Mindmap",
+                content: "Ensuring zero technical glitches before you hit 'Submit'.",
+                type: "interactive",
+                interactiveType: "mindmap"
+            },
         ],
         quiz: [
             {
@@ -1077,7 +1149,13 @@ export const modules: Module[] = [
                 content: "Practice responding to real reviewer comments.",
                 type: "interactive",
                 interactiveType: "reviewerRoleplay"
-            }
+            },
+            {
+                title: "Handling Revison Mindmap",
+                content: "The psychological and technical flow for addressing peer reviews.",
+                type: "interactive",
+                interactiveType: "mindmap"
+            },
         ],
         quiz: [
             {
@@ -1155,7 +1233,13 @@ export const modules: Module[] = [
                 content: "Plan your research visibility strategy.",
                 type: "interactive",
                 interactiveType: "impactPlanner"
-            }
+            },
+            {
+                title: "Research Impact Mindmap",
+                content: "How to build a digital presence and maximize citations.",
+                type: "interactive",
+                interactiveType: "mindmap"
+            },
         ],
         quiz: [
             {
@@ -1231,7 +1315,13 @@ export const modules: Module[] = [
                 content: "Draft key sections of a research proposal.",
                 type: "interactive",
                 interactiveType: "proposalWorkshop"
-            }
+            },
+            {
+                title: "Funding Strategy Mindmap",
+                content: "The steps to writing a winning grant proposal.",
+                type: "interactive",
+                interactiveType: "mindmap"
+            },
         ],
         quiz: [
             {
@@ -1306,7 +1396,13 @@ export const modules: Module[] = [
                 content: "Assess the TRL level of your current research.",
                 type: "interactive",
                 interactiveType: "trlAssessment"
-            }
+            },
+            {
+                title: "Technology Readiness Mindmap",
+                content: "Mapping your innovation's journey from lab to market.",
+                type: "interactive",
+                interactiveType: "mindmap"
+            },
         ],
         quiz: [
             {

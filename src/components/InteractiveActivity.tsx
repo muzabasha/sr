@@ -26,6 +26,7 @@ export default function InteractiveActivity({ type, moduleId }: Props) {
         case "proposalWorkshop": return <ProposalWorkshop />;
         case "trlAssessment": return <TRLAssessment />;
         case "startupReadiness": return <StartupReadiness />;
+        case "mindmap": return <ModuleMindmap moduleId={moduleId} />;
         case "startupMindmap": return <StartupMindmap />;
         default: return <div className="p-4 text-sm text-[var(--muted-foreground)]">Activity: {type}</div>;
     }
@@ -838,6 +839,207 @@ function StartupReadiness() {
                     <div className={`h-full rounded-full transition-all ${score >= 7 ? "bg-green-500" : score >= 4 ? "bg-yellow-500" : "bg-red-500"}`}
                         style={{ width: `${(score / 8) * 100}%` }} />
                 </div>
+            </div>
+        </div>
+    );
+}
+
+function ModuleMindmap({ moduleId }: { moduleId: number }) {
+    // Data for all modules
+    const mindmapData: Record<number, any[]> = {
+        1: [
+            { id: "curiosity", title: "1. Curiosity Spark", cost: "₹0", icon: "✨", narrative: "Observe daily problems. Ask 'Why does this happen?'.", roi: "High", details: "Research starts in the brain, not the lab.", successCase: "Ravi noticed a faulty BP monitor; started a 3-year journey.", failureCase: "Neha picked a 'trending' topic she hated; quit in 3 months." },
+            { id: "prelim", title: "2. The 'Why' Check", cost: "₹0", icon: "🔍", narrative: "Quick Google Scholar search to see if others asked the same thing.", roi: "High", details: "Validate your curiosity before committing.", successCase: "A student found their 'idea' was already a product; pivoted early.", failureCase: "Spent weeks planning only to find the solution already existed." },
+            { id: "smart", title: "3. Goal Setting", cost: "₹0", icon: "🎯", narrative: "Set specific, achievable research goals using tools like Google Calendar.", roi: "High", details: "Plan for 10 hours a week, not 50.", successCase: "Arun scheduled 2 hours daily; finished first draft in 4 weeks.", failureCase: "Sam tried 14 hours a day; burnt out by day 10." },
+            { id: "tools", title: "4. Tool Selection", cost: "₹0", icon: "🛠️", narrative: "Pick your free AI stack (Perplexity, Zotero, ResearchGate).", roi: "Max", details: "Don't work harder, work smarter.", successCase: "Used Zotero from day 1; zero citation errors.", failureCase: "Manually cited 50 papers; spent 1 week fixing typos." }
+        ],
+        2: [
+            { id: "scan", title: "1. Problem Scan", cost: "₹0", icon: "📡", narrative: "Scan news, farms, hospitals, or your own hobby for pain points.", roi: "High", details: "Look for 'frequent' and 'annoying' problems.", successCase: "Priya scanned her father's farm; found a tomato leaf disease.", failureCase: "Suresh scanned 'AI trends'; found generic topics with no data." },
+            { id: "interest", title: "2. Interest Match", cost: "₹0", icon: "❤️", narrative: "Check if the problem aligns with your passion (Coding, Biology, Design).", roi: "Max", details: "Passion is the fuel for long-term research.", successCase: "Kavya matched music with AI; published a unique Raga-ML paper.", failureCase: "Picked 'Blockchain' for CV; hated it after 2 months." },
+            { id: "feasible", title: "3. Feasibility", cost: "₹0", icon: "⚖️", narrative: "Check if you have the data, tools, and skills to solve it.", roi: "High", details: "Avoid 'World Hunger' scale; solve 'Local Garden' scale.", successCase: "Used free Kaggle datasets to validate her farm app idea.", failureCase: "Tried to build a quantum computer at home; failed by day 1." },
+            { id: "narrow", title: "4. Narrow Down", cost: "₹0", icon: "🔬", narrative: "Convert 'AI in Health' to 'AI for Diabetes in Elderly'.", roi: "Max", details: "Specificity is the key to publishable novelty.", successCase: "Narrowed to 'Skin cancer on dark skin'; found a major research gap.", failureCase: "Stayed 'broad'; results were too generic for any journal." }
+        ],
+        3: [
+            { id: "brainstorm", title: "1. AI Brainstorm", cost: "₹0", icon: "🧠", narrative: "Use LLMs to brainstorm directions, not to write facts.", roi: "High", details: "AI is a mirror, not a source of truth.", successCase: "Used ChatGPT to find 10 synonyms for his search query.", failureCase: "Asked AI for 'Recent Papers'; got 10 fake, halluncinated titles." },
+            { id: "verify", title: "2. Fact Check", cost: "₹0", icon: "✅", narrative: "Verify every AI claim on Google Scholar or official databases.", roi: "Critical", details: "AI can hallucinate; humans must validate.", successCase: "Anita verified an AI summary; found a crucial error in the logic.", failureCase: "A PhD student cited fake AI refs; degree was revoked." },
+            { id: "re-write", title: "3. Human Re-write", cost: "₹0", icon: "✍️", narrative: "Re-write AI outputs in your own voice to ensure deep understanding.", roi: "High", details: "AI text lacks 'Research Soul' and is easily detected.", successCase: "Used AI for grammar; kept logic human. Got 'Excellent' reviews.", failureCase: "Submitted AI-generated abstract; journal blacklisted him." },
+            { id: "transparency", title: "4. Disclosure", cost: "₹0", icon: "📢", narrative: "Add an 'AI Usage Statement' to your paper for transparency.", roi: "Max", details: "Honesty builds trust with peer reviewers.", successCase: "Reviewers praised his clear disclosure of using AI for editing.", failureCase: "Hidden AI use was found; paper was desk-rejected instantly." }
+        ],
+        4: [
+            { id: "keywords", title: "1. Keyword Plan", cost: "₹0", icon: "🗝️", narrative: "Create a list of primary and secondary keywords for your topic.", roi: "High", details: "Better keywords = Better results.", successCase: "Added 'Wearable' to 'Health monitor'; found relevant IoT papers.", failureCase: "Used only 'AI'; got 1 million useless results." },
+            { id: "boolean", title: "2. Boolean Search", cost: "₹0", icon: "⩓", narrative: "Use AND, OR, NOT to filter the noise from databases.", roi: "Max", details: "10 minutes of logic saves 10 days of reading.", successCase: "Amit used (X AND Y NOT Z); cut results from 3000 to 47.", failureCase: "Manually scrolled 50 pages of Google; missed key papers." },
+            { id: "trail", title: "3. Citation Trail", cost: "₹0", icon: "🔗", narrative: "Follow the 'Cited by' and 'References' of a great paper.", roi: "High", details: "One paper is a seed; follow the tree.", successCase: "Found one 2020 paper; followed its trail to 40 years of work.", failureCase: "Only read the first page of results; missed the seminal work." },
+            { id: "freshness", title: "4. Freshness Check", cost: "₹0", icon: "📅", narrative: "Filter results to the last 3-5 years for relevance.", roi: "High", details: "Old tech is often obsolete tech in CS.", successCase: "Found a 2-month-old paper that fixed his exact bottleneck.", failureCase: "Cited 2012 papers for LLMs; reviewer laughed at the 'old' data." }
+        ],
+        5: [
+            { id: "scan-title", title: "1. Title Scan", cost: "₹0", icon: "👀", narrative: "Quick scan of titles to remove 90% of irrelevant noise.", roi: "High", details: "Don't open the PDF yet; first check the title.", successCase: "Scanned 100 titles in 10 mins; kept only 15 relevant ones.", failureCase: "Downloaded 50 PDFs without reading titles; never opened half." },
+            { id: "abstract", title: "2. Abstract Filter", cost: "₹0", icon: "📄", narrative: "Read only the abstract to see the 'Problem' and 'Result'.", roi: "High", details: "The Abstract is the 'Trailer' of the movie.", successCase: "Ria filtered her 15 papers down to 5 using deep abstract reading.", failureCase: "Tried to read full papers immediately; lost interest after 2 days." },
+            { id: "method-spot", title: "3. Method Spotting", cost: "₹0", icon: "🔍", narrative: "Look at the methodology section: Is it similar to your plan?", roi: "High", details: "Find papers that solved problems like yours.", successCase: "Found a paper using 'LSTMs' for his exact dataset; huge help.", failureCase: "Picked a paper with perfect results but 'Impossible' equipment." },
+            { id: "golden", title: "4. Golden Selection", cost: "₹0", icon: "⭐", narrative: "Select 1 Review + 1 Tutorial + 3 Experimental papers.", roi: "Max", details: "This 'Golden 5' is all you need to start.", successCase: "Mastered his 5 papers in a week; started his code by Friday.", failureCase: "Hoarded 150 PDFs; spent 3 months just 'categorizing' them." }
+        ],
+        6: [
+            { id: "pass1", title: "1. Pass 1: Bird's Eye", cost: "₹0", icon: "🦅", narrative: "Title, Abstract, Figures, Headings. 5-10 minutes max.", roi: "High", details: "Decide: Is this worth my time?", successCase: "Pass 1 saved him from reading a flawed paper for 2 hours.", failureCase: "Read 20 pages of a paper only to find the result wasn't related." },
+            { id: "pass2", title: "2. Pass 2: Main Body", cost: "₹0", icon: "🏃", narrative: "Read everything except the math and proofs. 30-60 minutes.", roi: "High", details: "Understand the 'What' and 'Why'.", successCase: "Pass 2 gave her the intuition needed to build her own model.", failureCase: "Stuck on page 3 math for 5 hours; never finished the paper." },
+            { id: "pass3", title: "3. Pass 3: Deep Dive", cost: "₹0", icon: "🤿", narrative: "Virtually re-implement the study in your head. 1-2 hours.", roi: "Max", details: "Understand the 'How' and the 'Glitches'.", successCase: "Found a hidden flaw in a top paper during pass 3; wrote a fix.", failureCase: "Skimmed only; missed a crucial parameter that broke her code." },
+            { id: "annotate", title: "4. Annotate", cost: "₹0", icon: "📝", narrative: "Use Zotero/Notion to tag and summarize in your words.", roi: "High", details: "Un-annotated reading is forgotten reading.", successCase: "Searchable notes allowed him to find a quote in 3 seconds.", failureCase: "Remembered a paper existed but couldn't find the name." }
+        ],
+        7: [
+            { id: "compare", title: "1. Core Comparison", cost: "₹0", icon: "⚖️", narrative: "Pick 5 papers and list their methods, datasets, and scores.", roi: "High", details: "Compare what works and what doesn't.", successCase: "Noticed all 5 used the same small dataset; proposed a new one.", failureCase: "Read papers individually; never noticed they used the same flaw." },
+            { id: "matrix", title: "2. Matrix Build", cost: "₹0", icon: "🧶", narrative: "Build a table. Rows = Papers, Columns = Features/Methods.", roi: "Max", details: "The gap is usually an 'Empty Box' in your matrix.", successCase: "Blank 'Privacy' column across 10 rows led to her research gap.", failureCase: "Relied on memory; forgot that paper #3 already solved his gap." },
+            { id: "conflict", title: "3. Conflict Spotting", cost: "₹0", icon: "⚔️", narrative: "Find two authors who disagree. Why do they disagree?", roi: "High", details: "Intellectual debates are goldmines for research.", successCase: "Proposed a hybrid model to resolve a famous contradiction.", failureCase: "Ignored the 'Discussion' section; missed the experts' fight." },
+            { id: "aha", title: "4. The 'Aha' Moment", cost: "₹0", icon: "💡", narrative: "Connect the dots: 'Method X works here, but not there... why?'.", roi: "Max", details: "This is where your unique contribution is born.", successCase: "Realized OCT images + AI wasn't done for rural clinics yet.", failureCase: "Waited for 'divine inspiration' instead of building the matrix." }
+        ],
+        8: [
+            { id: "pain", title: "1. Identify Pain", cost: "₹0", icon: "🩹", narrative: "Who is suffering? What is broken? Why does it matter?", roi: "High", details: "A problem without a victim is not worth solving.", successCase: "Focused on 'Skin cancer diagnosis wait times in villages'.", failureCase: "Wrote: 'AI needs more efficiency' (Too vague, no pain)." },
+            { id: "scope", title: "2. Scope Bound", cost: "₹0", icon: "🧱", narrative: "Define the 'Walls' of your research. What will you NOT do?", roi: "High", details: "Scope prevents your project from becoming infinite.", successCase: "Defined: 'Only for 10-18 age group using Android devices'.", failureCase: "Tried to solve 'Cybersecurity' for the whole world at once." },
+            { id: "refine", title: "3. SMART Refine", cost: "₹0", icon: "📐", narrative: "Check if your statement is Specific, Measurable, and Timely.", roi: "Max", details: "A sharp statement acts as a shield against bad ideas.", successCase: "Refined to: 'Improving accuracy by 10% in low-light conds'.", failureCase: "Remained broad; advisor rejected it as 'unmeasurable'." },
+            { id: "validate-stmt", title: "4. Stakeholder Check", cost: "₹0", icon: "🤝", narrative: "Show your problem statement to a mentor or user. Do they agree?", roi: "High", details: "If they don't 'get it' in 60 seconds, it's too complex.", successCase: "Showed to a doctor; they added a crucial 'usability' angle.", failureCase: "Kept it secret; built a solution for a non-existent problem." }
+        ],
+        9: [
+            { id: "trace", title: "1. Profile Trace", cost: "₹0", icon: "👣", narrative: "Find the 5 most cited people in your bibliography. Follow them.", roi: "High", details: "Experts are people, not just names on papers.", successCase: "Followed Prof. Kumar; saw his recent call for collaborators.", failureCase: "Only read the name; never clicked the personal URL." },
+            { id: "deep-dive-exp", title: "2. Their Recent Work", cost: "₹0", icon: "📑", narrative: "Read their last 2 preprints or conference papers. What's next?", roi: "High", details: "The 'Discussion' section often holds their future plans.", successCase: "Found a typo in their code; sent a fix (Best intro ever).", failureCase: "Asked them a question answered in their first page's intro." },
+            { id: "reachout", title: "3. Value-Add Email", cost: "₹0", icon: "📧", narrative: "Don't ask for a favor. Offer an insight or a specific question.", roi: "Max", details: "One custom email > 1000 'Dear Sir' spams.", successCase: "Proposed a new dataset for their model; got an internship.", failureCase: "Emailed 50 profs in CC; got blacklisted as a spammer." },
+            { id: "nurture", title: "4. Stay Visible", cost: "₹0", icon: "🌱", narrative: "Share their work on LinkedIn. Tag them with an intelligent comment.", roi: "High", details: "Build a bridge before you need to cross it.", successCase: "Shared their paper with a video summary; they invited him.", failureCase: "Only emailed when he needed a reference letter; ignored." }
+        ],
+        10: [
+            { id: "skeleton", title: "1. Skeleton Draft", cost: "₹0", icon: "🦴", narrative: "Paste headings from the journal template. Add bullet points.", roi: "High", details: "An empty page is your biggest enemy. Fill it with bones.", successCase: "Built the skeleton in 1 hour; writing became a fill-in task.", failureCase: "Stared at a white screen for 1 week; got 'writer's block'." },
+            { id: "math-first", title: "2. Method/Results First", cost: "₹0", icon: "📊", narrative: "Write the concrete parts first. You already know what you did.", roi: "Max", details: "Don't wait for inspiration; record the facts first.", successCase: "Wrote Methodology while code was running; saved 2 weeks.", failureCase: "Tried writing from Abstract to Conclusion; got stuck at intro." },
+            { id: "polish", title: "3. Iterative Polish", cost: "₹0", icon: "💎", narrative: "First draft for content. Second for logic. Third for grammar.", roi: "High", details: "Separate 'Thinking' from 'Editing'.", successCase: "Used Grammarly/AI for the last pass only; kept logic strong.", failureCase: "Edited every sentence 10 times; never finished the page." },
+            { id: "abstract-last", title: "4. Abstract LAST", cost: "₹0", icon: "🎬", narrative: "The abstract is a summary of the WHOLE paper. Write it last.", roi: "Max", details: "You can't summarize what you haven't finished.", successCase: "Abstract took 15 mins because the paper was done.", failureCase: "Wrote Abstract first; had to delete it when results changed." }
+        ],
+        11: [
+            { id: "scope-audit", title: "1. Scope Audit", cost: "₹0", icon: "🏘️", narrative: "Does your paper fit the journal's 'Aims & Scope'?", roi: "High", details: "Scope mismatch is the #1 desk rejection reason.", successCase: "Re-read scope; pivoted from 'AI' journal to 'Agriculture' one.", failureCase: "Sent medical paper to CS journal; rejected in 24 hours." },
+            { id: "metrics", title: "2. Metric Check", cost: "₹0", icon: "📉", narrative: "Check H-index and Quartiles (Q1-Q4) on Scimago.", roi: "High", details: "Choose a realistic venue for early-stage career.", successCase: "Targeted a Q2 journal as a student; got accepted in 4 months.", failureCase: "Sent first paper to Nature; 1 year wait for a 1-line rejection." },
+            { id: "legit-check", title: "3. Legit Verify", cost: "₹0", icon: "⚖️", narrative: "Check Beall's List and Scopus. Is it a real journal?", roi: "Critical", details: "Predatory journals will kill your CV.", successCase: "Found a 'fake' journal just in time; withdrew submission.", failureCase: "Paid ₹50k to a fake journal; paper is now un-publishable." },
+            { id: "ready", title: "4. Final Selection", cost: "₹0", icon: "🎯", narrative: "Select a 'Dream', 'Reach', and 'Safety' option.", roi: "Max", details: "Have a plan B ready before you submit plan A.", successCase: "Safety journal accepted him after Dream journal rejected.", failureCase: "Had no backup; quit research after his first rejection." }
+        ],
+        12: [
+            { id: "template-sync", title: "1. Template Sync", cost: "₹0", icon: "📑", narrative: "Download the official LaTeX/Word template. Don't change margins.", roi: "High", details: "Non-compliance shows lack of professionalism.", successCase: "Used official Overleaf template; editors loved the layout.", failureCase: "Used custom styles; desk rejected for 'Formatting Issues'." },
+            { id: "grammar-guard", title: "2. Grammar Guard", cost: "₹0", icon: "🛡️", narrative: "Use tools like Paperpal or Grammarly. No typos on page 1.", roi: "Max", details: "An error on page 1 makes editors doubt your science.", successCase: "Editor noted: 'Well-written manuscript'. Straight to review.", failureCase: "3 typos in the title; rejected in 5 minutes by the editor." },
+            { id: "length", title: "3. Length Strict", cost: "₹0", icon: "📏", narrative: "Respect word and page limits. Cut the fluff.", roi: "High", details: "Extra pages cost the editor money and time.", successCase: "Cut 2 pages of generic intro; results became clearer.", failureCase: "Submitted 15 pages to 10-page limit; rejected instantly." },
+            { id: "cover-letter", title: "4. Cover Letter Sale", cost: "₹0", icon: "✉️", narrative: "Explain WHY this paper matters to THIS journal's readers.", roi: "Max", details: "The cover letter is your personal pitch to the editor.", successCase: "Explained how his work solved a 2023 editorial's question.", failureCase: "Wrote: 'Please accept my paper' (Generic & lazy)." }
+        ],
+        13: [
+            { id: "calm", title: "1. Calm Analysis", cost: "₹0", icon: "🧘", narrative: "Read the reviews. Close the tab. Wait 24 hours. Don't be angry.", roi: "High", details: "Reviewers want to help, even if they sound harsh.", successCase: "Initial anger passed; realized reviewer #2 was actually right.", failureCase: "Sent an angry reply in 1 hour; editor blacklisted him." },
+            { id: "point-plan", title: "2. Response Matrix", cost: "₹0", icon: "📋", narrative: "Put every comment in a table. Plan your defense or fix.", roi: "Max", details: "Never skip a comment. Even the small ones matter.", successCase: "Addressed 47 comments point-by-point; editor was impressed.", failureCase: "Ignored the 'hard' comments; reviewer rejected again." },
+            { id: "major-fix", title: "3. Real Revisions", cost: "₹0", icon: "🛠️", narrative: "Don't just change words. Re-run experiments if needed.", roi: "High", details: "Authors who do extra work get faster approval.", successCase: "Added one new comparison graph; reviewer #3 said 'Accept'.", failureCase: "Only fixed grammar; reviewer said 'Underlying flaws remain'." },
+            { id: "polite", title: "4. Polite Rebuttal", cost: "₹0", icon: "🤝", narrative: "Use: 'We thank the reviewer for this insight...' even if you disagree.", roi: "Max", details: "Respectful experts get respected back.", successCase: "Politely corrected an expert's mistake; they thanked her.", failureCase: "Arrogantly said 'Reviewer doesn't understand'; desk rejected." }
+        ],
+        14: [
+            { id: "orcid", title: "1. Research Identity", cost: "₹0", icon: "🆔", narrative: "Get an ORCID ID. Claim your profile on Scholar and ResearchGate.", roi: "High", details: "If people can't find you, they can't cite you.", successCase: "Linked his ORCID; citations from 4 platforms tracked instantly.", failureCase: "3 people had his same name; his citations went to others." },
+            { id: "presence", title: "2. Digital Buzz", cost: "₹0", icon: "🌐", narrative: "Share your 'Key Finding' on LinkedIn and Twitter/X.", roi: "High", details: "Social signals often lead to formal citations.", successCase: "A LinkedIn post got 10k views; paper downloads spiked.", failureCase: "Published and went silent; 5 years later, 0 citations." },
+            { id: "visual", title: "3. Graphical Abstract", cost: "₹0", icon: "🖼️", narrative: "Use Canva to make a 1-page visual summary of your paper.", roi: "Max", details: "A picture is worth 1000 citations in social media.", successCase: "Visual summary was shared by a top expert in the field.", failureCase: "Only shared the text PDF; nobody clicked the link." },
+            { id: "open-code", title: "4. Open Source", cost: "₹0", icon: "🔓", narrative: "Share your code on GitHub and data on Zenodo.", roi: "Max", details: "Reproducible papers are 2x more likely to be cited.", successCase: "Other students used his script; every use = one citation.", failureCase: "Kept code 'private'; researchers skipped his paper for others." }
+        ],
+        15: [
+            { id: "agency-align", title: "1. Agency Align", cost: "₹0", icon: "🎯", narrative: "Match your idea to the funding agency's 'Priority Areas'.", roi: "High", details: "Don't ask for health money for an agriculture project.", successCase: "Targeted DST specifically for 'Rural Women Tech' call.", failureCase: "Sent a generic tech proposal to a biodiversity fund." },
+            { id: "smart-obj", title: "2. SMART Objectives", cost: "₹0", icon: "📐", narrative: "Write exactly what you will deliver: 'A prototype that does X'.", roi: "Max", details: "Agencies fund 'Outputs', not 'Hopes'.", successCase: "List of 5 clear deliverables secured the full ₹35L grant.", failureCase: "Wrote: 'We will study the effects of...' (Too vague to fund)." },
+            { id: "pilot-proof", title: "3. Pilot Proof", cost: "₹0", icon: "📸", narrative: "Show photos of your lab setup or early results. Gain trust.", roi: "Max", details: "Trust is the currency of funding boards.", successCase: "Included photos of his ₹500 prototype; proved 'It works!'.", failureCase: "Had no photos or data; jury didn't believe it was feasible." },
+            { id: "fin-plan", title: "4. Receipt-Level Budget", cost: "₹0", icon: "💰", narrative: "Breakdown every rupee. Justify equipment, travel, and salary.", roi: "High", details: "They need to see you won't waste the money.", successCase: "Detailed budget justification left the jury with zero doubts.", failureCase: "Asked for '₹5 Lakhs generic'; rejected for 'Financial opacity'." }
+        ],
+        16: [
+            { id: "trl-identify", title: "1. Honest Stage", cost: "₹0", icon: "📍", narrative: "Where are you? TRL 1 (Idea) or TRL 4 (Lab Demo)?", roi: "High", details: "Lying about TRL is research fraud.", successCase: "Admitted they were TRL 3; got a 'Foundation' grant.", failureCase: "Claimed TRL 7; jury asked for demo; failed miserably." },
+            { id: "trl-lab", title: "2. Lab Validation", cost: "₹0", icon: "⚗️", narrative: "TRL 4. Does it work under controlled conditions?", roi: "High", details: "The lab is the 'Safe Space' for failure.", successCase: "Found 10 bugs in the lab; fixed them for ₹0.", failureCase: "Tested first time in the field; device caught fire." },
+            { id: "trl-env", title: "3. Environment Test", cost: "Low", icon: "🌍", narrative: "TRL 6. Take it outside. Real weather, real people.", roi: "High", details: "The real world is messier than the lab.", successCase: "Tested crop app in rain; learned they needed higher contrast.", failureCase: "Only tested in AC lab; app was unreadable in the sun." },
+            { id: "trl-ready", title: "4. Market Ready", cost: "₹0", icon: "🏙️", narrative: "TRL 9. Fully proven. Ready for startup or licensing.", roi: "Max", details: "Once you hit TRL 9, the investors find you.", successCase: "Hit TRL 8 with 1yr field data; got 3 investor offers.", failureCase: "Launched at TRL 4; customer reviews killed the reputation." }
+        ]
+    };
+
+    const steps = mindmapData[moduleId] || [];
+    const [activeStep, setActiveStep] = useState<string | null>(null);
+
+    return (
+        <div className="space-y-6">
+            <div className="p-5 rounded-xl bg-linear-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20">
+                <h4 className="text-lg font-bold mb-2 text-indigo-500 text-center">🌟 Narrative Strategy: Step-by-Step</h4>
+                <p className="text-sm text-(--muted-foreground) leading-relaxed text-center italic">
+                    &quot;Success in research isn't just about intelligence—it's about following a proven procedure. 
+                    Expand each step to see success stories, failure traps, and the maximum ROI strategy.&quot;
+                </p>
+            </div>
+            
+            <p className="text-xs text-(--muted-foreground) text-center mb-4 uppercase tracking-widest font-semibold">
+                Interactive Journey Map
+            </p>
+
+            <div className="relative">
+                <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-purple-500/20 via-pink-500/20 to-purple-500/20 -translate-x-1/2 hidden md:block" />
+
+                <div className="grid md:grid-cols-2 gap-x-12 gap-y-8 relative">
+                    {steps.map((step, i) => (
+                        <motion.div
+                            key={step.id}
+                            initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.1 }}
+                            className={`relative flex flex-col ${i % 2 === 0 ? "md:items-end text-right" : "md:items-start text-left"}`}
+                        >
+                            <div className="absolute top-6 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-white border-2 border-pink-500 z-10 hidden md:block" />
+
+                            <button
+                                onClick={() => setActiveStep(activeStep === step.id ? null : step.id)}
+                                className={`w-full max-w-sm p-4 rounded-xl border transition-all duration-300 ${activeStep === step.id
+                                    ? "bg-linear-to-br from-purple-500 to-pink-500 text-white border-transparent shadow-lg scale-105"
+                                    : "bg-(--secondary) border-(--border) hover:border-pink-500"
+                                    }`}
+                            >
+                                <div className="flex items-center gap-3 mb-2">
+                                    <span className={`text-2xl p-2 rounded-lg ${activeStep === step.id ? "bg-white/20" : "bg-white dark:bg-zinc-800 shadow-sm"}`}>
+                                        {step.icon}
+                                    </span>
+                                    <div className="flex-1 text-left">
+                                        <h4 className="font-bold text-sm">{step.title}</h4>
+                                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${activeStep === step.id ? "bg-white/20" : "bg-pink-500/10 text-pink-500"}`}>
+                                            Cost: {step.cost}
+                                        </span>
+                                    </div>
+                                </div>
+                                <p className={`text-xs line-clamp-2 ${activeStep === step.id ? "text-white/90" : "text-(--muted-foreground)"}`}>
+                                    {step.narrative}
+                                </p>
+                            </button>
+
+                            <AnimatePresence mode="wait">
+                                {activeStep === step.id && (
+                                    <motion.div
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: "auto" }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        className="mt-3 w-full max-w-sm text-left overflow-hidden"
+                                    >
+                                        <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+                                            <div className="grid grid-cols-2 gap-3">
+                                                <div className="p-2 rounded-lg bg-green-500/10 border border-green-500/20">
+                                                    <h5 className="text-[9px] font-bold uppercase tracking-wider text-green-500 mb-1">Success Case</h5>
+                                                    <p className="text-[10px] leading-tight">{step.successCase}</p>
+                                                </div>
+                                                <div className="p-2 rounded-lg bg-red-500/10 border border-red-500/20">
+                                                    <h5 className="text-[9px] font-bold uppercase tracking-wider text-red-500 mb-1">Failure Case</h5>
+                                                    <p className="text-[10px] leading-tight">{step.failureCase}</p>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <h5 className="text-[10px] font-bold uppercase tracking-wider text-pink-500">Maximum ROI Strategy</h5>
+                                                <p className="text-xs text-(--foreground)">{step.roi}</p>
+                                            </div>
+                                            <div>
+                                                <h5 className="text-[10px] font-bold uppercase tracking-wider text-purple-500">Pro Tip</h5>
+                                                <p className="text-xs italic text-(--foreground)">{step.details}</p>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-linear-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 text-center">
+                <p className="text-sm font-medium italic">
+                    &quot;Your journey is unique, but the path is proven. Follow the steps, learn from failures, and maximize your impact.&quot;
+                </p>
             </div>
         </div>
     );
