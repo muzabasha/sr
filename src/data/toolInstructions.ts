@@ -6,7 +6,7 @@ export interface ToolInstruction {
     donts: string[];
 }
 
-const instructions: Record<string, ToolInstruction> = {
+export const toolInstructions: Record<string, ToolInstruction> = {
     // ===== MODULE 1 & 2: MINDSET & DOMAIN TOOLS =====
     "ChatGPT (Free)": {
         howToUse: [
@@ -1576,7 +1576,7 @@ const instructions: Record<string, ToolInstruction> = {
 
 // Helper function to get instructions for a tool
 export function getToolInstructions(toolName: string): ToolInstruction | null {
-    return instructions[toolName] || null;
+    return toolInstructions[toolName] || null;
 }
 
-export default instructions;
+export default toolInstructions;

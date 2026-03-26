@@ -62,6 +62,14 @@ export default function Header({ onNavigate }: { onNavigate: (view: string, modu
                         🎭 Scenario
                     </button>
 
+                    <button
+                        onClick={() => onNavigate("tools")}
+                        className="px-3 py-1.5 text-xs font-bold rounded-lg bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition shadow-sm"
+                        title="AI Tools Guide"
+                    >
+                        🤖 AI Tools
+                    </button>
+
                     <a
                         href="https://scholar-sparkle-web.lovable.app/"
                         target="_blank"

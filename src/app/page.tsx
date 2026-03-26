@@ -8,8 +8,9 @@ import JourneyMap from "@/components/JourneyMap";
 import BadgesPage from "@/components/BadgesPage";
 import BranchingScenario from "@/components/BranchingScenario";
 import ResearchCopilot from "@/components/ResearchCopilot";
+import AIToolsPage from "@/components/AIToolsPage";
 
-type View = "home" | "module" | "journey" | "badges" | "scenario";
+type View = "home" | "module" | "journey" | "badges" | "scenario" | "tools";
 
 function AppContent() {
   const [view, setView] = useState<View>("home");
@@ -50,6 +51,7 @@ function AppContent() {
             <BranchingScenario />
           </div>
         )}
+        {view === "tools" && <AIToolsPage />}
       </main>
       <ResearchCopilot />
       <footer className="border-t border-[var(--border)] py-6 mt-12">
