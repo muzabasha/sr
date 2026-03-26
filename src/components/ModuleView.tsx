@@ -60,7 +60,7 @@ export default function ModuleView({
     };
 
     return (
-        <div className={`max-w-6xl mx-auto px-4 py-6 ${presentationMode ? "presentation-mode" : ""}`}>
+        <div className={`mx-auto px-4 py-6 ${presentationMode ? "presentation-mode w-full max-w-[95%] min-h-screen flex flex-col justify-center" : "max-w-6xl"}`}>
             {/* Module Header */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
                 <div className="flex items-center gap-3 mb-2 flex-wrap">
@@ -79,35 +79,39 @@ export default function ModuleView({
             </motion.div>
 
             {/* Analogy Banner */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.1 }}
-                className="mb-6 p-4 rounded-xl bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20"
-            >
-                <p className="text-sm italic">💡 <span className="font-medium">Analogy:</span> {mod.analogy}</p>
-            </motion.div>
+            {!presentationMode && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.1 }}
+                    className="mb-6 p-4 rounded-xl bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20"
+                >
+                    <p className="text-sm italic">💡 <span className="font-medium">Analogy:</span> {mod.analogy}</p>
+                </motion.div>
+            )}
 
             {/* Tab Navigation */}
-            <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
-                {(["slides", "quiz", "casestudy", "ethics", "dodont", "aitools"] as const).map((tab) => (
-                    <button
-                        key={tab}
-                        onClick={() => setActiveTab(tab)}
-                        className={`px-4 py-2 rounded-lg text-sm whitespace-nowrap transition ${activeTab === tab
-                            ? "bg-indigo-500 text-white"
-                            : "bg-[var(--secondary)] text-[var(--muted-foreground)] hover:bg-[var(--accent)]"
-                            }`}
-                    >
-                        {tab === "slides" && "📑 Content"}
-                        {tab === "quiz" && "❓ Quiz"}
-                        {tab === "casestudy" && "📋 Case Study"}
-                        {tab === "ethics" && "⚖️ Ethics Check"}
-                        {tab === "dodont" && "✅ Do & Don't"}
-                        {tab === "aitools" && `🤖 AI Tools (${mod.aiTools.length})`}
-                    </button>
-                ))}
-            </div>
+            {!presentationMode && (
+                <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
+                    {(["slides", "quiz", "casestudy", "ethics", "dodont", "aitools"] as const).map((tab) => (
+                        <button
+                            key={tab}
+                            onClick={() => setActiveTab(tab)}
+                            className={`px-4 py-2 rounded-lg text-sm whitespace-nowrap transition ${activeTab === tab
+                                ? "bg-indigo-500 text-white"
+                                : "bg-[var(--secondary)] text-[var(--muted-foreground)] hover:bg-[var(--accent)]"
+                                }`}
+                        >
+                            {tab === "slides" && "📑 Content"}
+                            {tab === "quiz" && "❓ Quiz"}
+                            {tab === "casestudy" && "📋 Case Study"}
+                            {tab === "ethics" && "⚖️ Ethics Check"}
+                            {tab === "dodont" && "✅ Do & Don't"}
+                            {tab === "aitools" && `🤖 AI Tools (${mod.aiTools.length})`}
+                        </button>
+                    ))}
+                </div>
+            )}
 
             <AnimatePresence mode="wait">
                 {activeTab === "slides" && (
@@ -412,7 +416,7 @@ function SlideContent({
             <p className={`text-[var(--muted-foreground)] mb-4 ${presentationMode ? "text-xl" : ""}`}>{slide.content}</p>
 
             {slide.type === "text" && slide.bulletPoints && (
-                <ul className="space-y-3">
+                <ul className={`space-y-4 ${presentationMode ? "mt-8 ml-8" : ""}`}>
                     {slide.bulletPoints.map((bp, i) => {
                         if (presentationMode && i >= revealedBullets) return null;
                         return (
@@ -421,10 +425,10 @@ function SlideContent({
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: presentationMode ? 0 : i * 0.1 }}
-                                className={`flex items-start gap-2 ${presentationMode ? "text-lg" : "text-sm"}`}
+                                className={`flex items-start gap-3 ${presentationMode ? "text-2xl" : "text-sm"}`}
                             >
-                                <span className="text-indigo-500 mt-1">▸</span>
-                                <span>{bp}</span>
+                                <span className={`text-indigo-500 ${presentationMode ? "text-3xl" : "mt-1"}`}>▸</span>
+                                <span className={presentationMode ? "font-medium" : ""}>{bp}</span>
                             </motion.li>
                         );
                     })}
@@ -463,19 +467,19 @@ function SlideContent({
             )}
 
             {slide.type === "diagram" && slide.bulletPoints && (
-                <div className="space-y-3">
+                <div className={`space-y-4 ${presentationMode ? "mt-6" : "space-y-3"}`}>
                     {slide.bulletPoints.map((bp, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: i * 0.15 }}
-                            className="flex items-center gap-3 p-3 rounded-lg bg-[var(--secondary)]"
+                            className={`flex items-center gap-4 p-4 rounded-lg bg-[var(--secondary)] ${presentationMode ? "py-6" : "p-3"}`}
                         >
-                            <div className={`w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white text-sm font-bold`}>
+                            <div className={`${presentationMode ? "w-16 h-16 text-2xl" : "w-8 h-8 text-sm"} shrink-0 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold`}>
                                 {i + 1}
                             </div>
-                            <span className={presentationMode ? "text-lg" : "text-sm"}>{bp}</span>
+                            <span className={presentationMode ? "text-2xl font-medium" : "text-sm"}>{bp}</span>
                         </motion.div>
                     ))}
                 </div>
