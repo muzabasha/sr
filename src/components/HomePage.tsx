@@ -157,7 +157,7 @@ export default function HomePage({ onNavigate }: { onNavigate: (view: string, mo
                 className="mb-12"
             >
                 <h3 className="text-2xl font-bold mb-6 text-center">17-Step Journey to Ethical AI Research Excellence</h3>
-                <ZoomableImage src="/journey-map.jpg" />
+                <ZoomableImage src="/cover.png" />
             </motion.section>
 
             {/* Comparison: Traditional vs AI-Assisted */}
