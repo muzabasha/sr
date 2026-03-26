@@ -1,12 +1,81 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { modules } from "@/data/modules";
 import { useApp } from "@/context/AppContext";
 
+// Zoomable Image Component
+function ZoomableImage({ src }: { src: string }) {
+    const [scale, setScale] = useState(1);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const isDragging = useRef(false);
+    const dragStart = useRef({ x: 0, y: 0 });
+
+    const handleWheel = (e: React.WheelEvent) => {
+        if (!e.ctrlKey) return;
+        e.preventDefault();
+        setScale(s => Math.min(Math.max(s - e.deltaY * 0.01, 1), 5));
+    };
+
+    const handleMouseDown = (e: React.MouseEvent) => {
+        if (scale === 1) return;
+        isDragging.current = true;
+        dragStart.current = { x: e.clientX - position.x, y: e.clientY - position.y };
+    };
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!isDragging.current) return;
+        setPosition({ x: e.clientX - dragStart.current.x, y: e.clientY - dragStart.current.y });
+    };
+
+    const handleMouseUp = () => { isDragging.current = false; };
+
+    return (
+        <div 
+            className="relative w-full h-[300px] md:h-[600px] bg-[var(--secondary)] rounded-2xl overflow-hidden border border-[var(--border)] group"
+            onWheel={handleWheel}
+        >
+            <div className="absolute top-4 right-4 z-10 flex gap-2 lg:opacity-0 group-hover:opacity-100 transition-opacity bg-black/60 p-2 rounded-xl backdrop-blur-sm">
+                <button onClick={() => setScale(s => Math.min(s + 0.5, 5))} className="w-10 h-10 bg-white/20 text-white rounded-lg hover:bg-white/30 text-xl font-bold transition">＋</button>
+                <button onClick={() => setScale(s => Math.max(s - 0.5, 1))} className="w-10 h-10 bg-white/20 text-white rounded-lg hover:bg-white/30 text-xl font-bold transition">－</button>
+                <button onClick={() => { setScale(1); setPosition({ x: 0, y: 0 }) }} className="px-4 bg-white/20 text-white rounded-lg hover:bg-white/30 text-sm font-semibold transition">Reset</button>
+            </div>
+            
+            <div 
+                className={`w-full h-full ${scale > 1 ? 'cursor-grab active:cursor-grabbing' : ''}`}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+                onTouchStart={(e) => {
+                    if (scale === 1) return;
+                    isDragging.current = true;
+                    dragStart.current = { x: e.touches[0].clientX - position.x, y: e.touches[0].clientY - position.y };
+                }}
+                onTouchMove={(e) => {
+                    if (!isDragging.current) return;
+                    setPosition({ x: e.touches[0].clientX - dragStart.current.x, y: e.touches[0].clientY - dragStart.current.y });
+                }}
+                onTouchEnd={handleMouseUp}
+            >
+                {/* Notice: Assumes the image is saved in the public folder as journey-map.jpg */}
+                <img 
+                    src={src} 
+                    alt="Research Journey Visual Map" 
+                    className="w-full h-full object-contain pointer-events-none select-none transition-transform duration-75"
+                    style={{ transform: `translate(${position.x}px, ${position.y}px) scale(${scale})` }}
+                />
+            </div>
+            <div className="absolute bottom-4 left-4 bg-black/60 text-white/90 text-xs px-3 py-1.5 rounded-lg backdrop-blur-sm">
+                <span className="hidden md:inline">Ctrl + Scroll to zoom in/out. </span>Drag to pan when zoomed.
+            </div>
+        </div>
+    );
+}
+
 export default function HomePage({ onNavigate }: { onNavigate: (view: string, moduleId?: number) => void }) {
     const { progress, searchQuery, toggleBookmark } = useApp();
-    const [activeTab, setActiveTab] = useState<"modules" | "quizzes" | "flashcards">("modules");
+    const [activeTab, setActiveTab] = useState<"modules" | "quizzes" | "flashcards" | "videos">("modules");
 
     const filtered = modules.filter(
         (m) =>
@@ -80,6 +149,17 @@ export default function HomePage({ onNavigate }: { onNavigate: (view: string, mo
                 ))}
             </motion.section>
 
+            {/* Visual Overview Image */}
+            <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25 }}
+                className="mb-12"
+            >
+                <h3 className="text-2xl font-bold mb-6 text-center">17-Step Journey to Ethical AI Research Excellence</h3>
+                <ZoomableImage src="/journey-map.jpg" />
+            </motion.section>
+
             {/* Comparison: Traditional vs AI-Assisted */}
             <motion.section
                 initial={{ opacity: 0, y: 20 }}
@@ -132,6 +212,12 @@ export default function HomePage({ onNavigate }: { onNavigate: (view: string, mo
                         className={`px-6 py-3 rounded-t-xl font-bold transition-all ${activeTab === "flashcards" ? "text-amber-500 border-b-2 border-amber-500 bg-amber-500/5" : "text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--secondary)]"}`}
                     >
                         🗂️ Research Flashcards
+                    </button>
+                    <button
+                        onClick={() => setActiveTab("videos")}
+                        className={`px-6 py-3 rounded-t-xl font-bold transition-all ${activeTab === "videos" ? "text-rose-500 border-b-2 border-rose-500 bg-rose-500/5" : "text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--secondary)]"}`}
+                    >
+                        🎥 Learn by Watching
                     </button>
                 </div>
 
@@ -216,6 +302,23 @@ export default function HomePage({ onNavigate }: { onNavigate: (view: string, mo
                             <h4 className="text-lg font-semibold mb-2 text-(--muted-foreground)">More Flashcards Coming Soon</h4>
                             <p className="text-sm text-(--muted-foreground)">Keep checking back as we add more generative AI study materials based on the modules.</p>
                         </div>
+                    </motion.div>
+                )}
+
+                {activeTab === "videos" && (
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl mx-auto">
+                        <a href="https://notebooklm.google.com/notebook/a4914d56-22c7-43a6-96a1-84969fc7013f?artifactId=7ac204ce-ca0e-499a-b72e-bad05ebc1c48" target="_blank" rel="noopener noreferrer" className="block group">
+                            <div className="p-8 rounded-2xl bg-gradient-to-br from-rose-500/5 to-pink-500/10 border border-(--border) hover:border-rose-500 hover:shadow-xl hover:shadow-rose-500/20 transition-all flex flex-col sm:flex-row items-center gap-8">
+                                <div className="text-8xl group-hover:scale-110 transition-transform origin-center shrink-0">
+                                    🎥
+                                </div>
+                                <div className="text-center sm:text-left">
+                                    <h4 className="text-3xl font-bold mb-3 text-(--foreground) group-hover:text-rose-500">Visual Research Guide</h4>
+                                    <p className="text-lg text-(--muted-foreground) mb-6">Want to speed up your learning? Watch our comprehensive, interactive visual guide constructed directly inside NotebookLM to absorb the research methodology faster.</p>
+                                    <span className="inline-block text-sm font-bold px-8 py-3 rounded-xl bg-rose-500 text-white hover:bg-rose-600 shadow-md">Start Watching Now ↗</span>
+                                </div>
+                            </div>
+                        </a>
                     </motion.div>
                 )}
             </section>
